@@ -1,0 +1,16 @@
+package day1212;
+
+public class Book94 {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//94페이지 예제
+		int value=6;
+		if(value%2==0 | value%3==0)
+			System.err.println("2또는 3의 배수이군요");
+		
+		if(0 |1)
+			System.err.println("2또는 3의 배수이군요");
+	}
+
+}

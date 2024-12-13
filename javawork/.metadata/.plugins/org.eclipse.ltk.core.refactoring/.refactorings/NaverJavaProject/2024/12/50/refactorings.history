@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename type &apos;day1212.Ex9Exam&apos; to &apos;Ex10Exam&apos;&#x0D;&#x0A;- Original project: &apos;NaverJavaProject&apos;&#x0D;&#x0A;- Original element: &apos;day1212.Ex9Exam&apos;&#x0D;&#x0A;- Renamed element: &apos;day1212.Ex10Exam&apos;&#x0D;&#x0A;- Update references to refactored element&#x0D;&#x0A;- Update textual occurrences in comments and strings" description="Rename type &apos;Ex9Exam&apos;" flags="589830" id="org.eclipse.jdt.ui.rename.type" input="/src&lt;day1212{Ex9Exam.java[Ex9Exam" matchStrategy="1" name="Ex10Exam" qualified="false" references="true" similarDeclarations="false" stamp="1733982644081" textual="false" version="1.0"/>
+</session>
