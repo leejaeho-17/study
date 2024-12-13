@@ -4,11 +4,7 @@ public class Ex12For {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		/*
-		 * 문제 1 
-		 * 숫자 n 을 입력하면 1부터 n까지의 합계를 구하시오
-		 * (for문 사용할것)
-		 */
+
 	}
 
 }
