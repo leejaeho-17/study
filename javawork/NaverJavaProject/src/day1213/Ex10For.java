@@ -4,7 +4,7 @@ public class Ex10For {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		for(int i=1;i<=5;i++)//3번째값은 증간연산자나 대입연산자만 올수있다
+		for(int i=1;i<=5;i++)//3번째값은 증감연산자나 대입연산자만 올수있다
 			System.out.print(i+" ");
 		System.out.println();
 		for(int i=1;i<=10;i+=2)
