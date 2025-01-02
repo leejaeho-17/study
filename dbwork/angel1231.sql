@@ -96,7 +96,6 @@ ALTER TABLE TEST2 ADD BLOOD VARCHAR2(10) DEFAULT 'A';
 ALTER TABLE TEST2 DROP COLUMN TODAY;
 --3. TEST2 의 NAME을 SAWON_NAME 으로 컬럼이름 변경하기
 ALTER TABLE TEST2 RENAME COLUMN NAME TO SAWON_NAME;
-
 --4. BLOOD 에 제약조건 추가(A,B,O,AB 만 가능하도록 CHECK) CK_TEST2_BLOOD
 ALTER TABLE TEST2 ADD CONSTRAINT CK_TEST2_BLOOD CHECK(BLOOD IN ('A','B','O','AB'));
 --5. NN_TEST2_NAME 이라는 제약조건을 제거하기
@@ -229,8 +228,13 @@ commit;
  --부모테이블을 삭제해보자
  drop table food;-- 삭제 안됨, 자식테이블을 먼저 삭제해야 부모테이블도 삭제가 가능
  
+ drop table booking;
 
+ drop table sawon;
+ 
+ drop sequence seq_food;
 
+ drop sequence seq1;
 
 
 
