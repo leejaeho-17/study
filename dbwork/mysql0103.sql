@@ -40,8 +40,8 @@ select * from person p,stu s where p.num=s.num;
 select p.name,p.blood,p.age,s.kor,s.eng,s.sum
 from person p,stu s where p.num=s.num;
  -- 방법 3
- select name,blood,age,hp,kor,eng,sum
- from person p inner join stu s on p.num=s.num;
+select name,blood,age,hp,kor,eng,sum
+from person p inner join stu s on p.num=s.num;
  
  -- stu 생성시 on delete cascade 설정
  -- person 에서 1번을 삭제하면 stu 에서도 같이 삭제됨
@@ -52,4 +52,10 @@ select * from stu;
 
 
 select name,age,blood,hp,date_format(today,"%Y-%m-%d %H:%i") today from person;
+
+select name,blood,age,hp,kor,eng,sum
+from person p inner join stu s on p.num=s.num;
+
+select blood,count(*) count,round(avg(age),1) avgage from person 
+group by blood order by count;
 

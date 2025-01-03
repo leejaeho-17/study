@@ -12,7 +12,7 @@ public class Ex4MysqlJoin {
 	String url="jdbc:mysql://localhost:3306/study502?serverTimezone=Asia/Seoul";
 	String username="root";
 	String password="alsxm12@34";
-	
+
 	public Ex4MysqlJoin() {
 		// TODO Auto-generated constructor stub
 		try {
@@ -22,7 +22,7 @@ public class Ex4MysqlJoin {
 			System.out.println("Mysql 드라이버 실패:"+e.getMessage());
 		}
 	}
-	
+
 	public Connection getConnection()
 	{
 		Connection conn=null;
@@ -34,13 +34,13 @@ public class Ex4MysqlJoin {
 		}
 		return conn;
 	}
-	
+
 	public void personBloodGroup()
 	{
 		Connection conn=null;
 		Statement stmt=null;
 		ResultSet rs=null;
-		
+
 		conn=this.getConnection();
 		//방법 1
 		//String sql="select name,age,blood,hp,date_format(today,\"%Y-%m-%d %H:%i\") today from person";
@@ -52,13 +52,14 @@ public class Ex4MysqlJoin {
 		try {
 			stmt=conn.createStatement();
 			rs=stmt.executeQuery(sql);
-			System.out.println("혈액형\t핼액갯수\t나이평균");
+			System.out.println("** 혈액형별 분석 **");
+			System.out.println("혈액형\t인원수\t평균나이");
 			System.out.println("=".repeat(30));
 			while(rs.next())
 			{
 				String blood=rs.getNString(1);
 				int count=rs.getInt(2);
-				int avgage=rs.getInt(3);
+				double avgage=rs.getDouble(3);
 
 				System.out.println(blood+"\t"+count+"\t"+avgage);
 			}
@@ -76,7 +77,7 @@ public class Ex4MysqlJoin {
 		}
 
 	}
-		
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Ex4MysqlJoin ex4=new Ex4MysqlJoin();
