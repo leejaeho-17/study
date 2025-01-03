@@ -169,6 +169,7 @@ public class Ex5MysqlInsertSelect {
 	//이름을 찾아 삭제하는 메소드
 	public void deletePerson(String name)
 	{
+		int count=0;
 		/*
 		 * name 이 이영자라면
 		 * 이영자가 있을 경우
@@ -186,6 +187,33 @@ public class Ex5MysqlInsertSelect {
 		 *   1명이 삭제되면 1 반환
 		 *   해당이름이 없어서 삭제를 못했다면 0반환
 		 */
+		Connection conn=null;
+		Statement stmt=null;
+		
+		String sql="delete from person where name='"+name+"'";
+		
+		conn=this.getConnection();
+		
+		try {
+			stmt=conn.createStatement();
+			count=stmt.executeUpdate(sql);
+			if(count==0)
+				System.out.println(name+"님은 존재하지 않습니다");
+			else
+				System.out.println(count+"명의 데이터가 삭제되었습니다");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			try {
+				stmt.close();
+				conn.close();
+			} catch (SQLException|NullPointerException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
 	}
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
