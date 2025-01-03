@@ -234,10 +234,29 @@ end;
 /
 
 --상품명을 입력하면 shop 테이블에서 그 이름을 포함하고 있는 데이터들을 모두 출력
-accept ssang prompt '상품명을 입력하세요';
+accept sangpum prompt '상품명을 입력하세요';
 
 declare
-    v_sang
+    v_sangpum varchar2(30) :='&sangpum';
+    cursor s1
+    is
+    select * from shop where sangname like '%'||v_sangpum||'%';
+    
+    --갯수를 얻어올 변수
+    v_cnt number(2);
 begin
+    --입력한 상품명을 포함한 레코드의 갯수를 얻어보자
+    select count(*) into v_cnt
+    from shop where sangname like '%'||v_sangpum||'%';
+    if v_cnt=0 then
+        dbms_output.put_line(v_sangpum||'상품은 존재하지 않습니다');
+    else
+        dbms_output.put_line('상품코드     상품명     상품가격');
+        dbms_output.put_line('----------------------------');
+    for s in s1 loop
+        dbms_output.put_line(s.sangcode||'   '||s.sangname||'    '||s.sangprice); 
+        exit when s1%notfound; --더이상 데이터가 없으면 for문을 빠져나가
+        end loop;
+    end if;
 end;
 /
