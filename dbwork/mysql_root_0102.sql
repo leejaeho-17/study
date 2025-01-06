@@ -77,3 +77,11 @@ select pow(2,3), mod(10,3) from dual; -- 8 1
 -- least(숫자1,숫자2...):가장 작은 숫자 구하기
 select greatest(100,21,12,51) from dual;
 select least(100,21,12,51,5130,123021) from dual;
+
+-- 연습용 테이블 생성
+create table shop(
+	idx smallint auto_increment primary key,
+    sangpum varchar(30),
+    su smallint default 1,
+    danga int,
+    ipgoday datetime);
