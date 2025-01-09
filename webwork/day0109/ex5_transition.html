@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*공통 css*/
+        #ex1,#ex2{
+            background-color: #905;
+            color: yellow;
+            width: 150px;
+            height: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            font-family: 'comic sans ms';
+        }
+
+        #ex3 img{
+            width: 100px;
+            height: 100px;
+            opacity: 0.2;/*투명도 0~1*/
+            border: 5px solid #900;
+            transform: rotate(10deg);
+            cursor: pointer;
+            transition: all 3s;/*all:전체속성변경,3s:효과지속시간:3초*/
+        }
+        /*이미지에 마우스를 올렸을때의 애니메이션 효과주기*/
+        #ex3 img:hover{
+            opacity: 1.0;
+            border-color: #281390;
+            transform: rotate(45deg);
+        }
+        #ex1{
+            transition-property: width;/*width 에 효과를 주겠다는 의미*/
+            transition-duration: 2s;/*효과 지속시간은 2초*/
+            
+        }
+        #ex1:hover{
+            width: 400px;
+        }
+        #ex2{
+            transition: width 3s;
+        }
+        #ex2:hover{
+            width: 400px;
+        }
+    </style>
+</head>
+<body>
+<p id="ex1">transition test</p>
+<p id="ex2">transition test</p>
+<p id="ex3">
+    <img src="../photo2/bottle01.jpg">
+</p>
+</body>
+</html>
