@@ -6,9 +6,9 @@ public class Ex2Switch {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Scanner sc=new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 //		char ch;
-		
+
 //		System.out.println("알파벳 한글자 입력");
 //		ch=sc.nextLine().charAt(0);//입력한 문자열중 첫글자를 char 타입으로 반환
 //		
@@ -29,12 +29,12 @@ public class Ex2Switch {
 //		default:
 //			System.out.println("a,b,c 가 아닌 알파벳");
 //		}
-		
+
 		System.out.println("영어 단어를 입력해주세요");
-		String msg=sc.nextLine();
-		
-		//jdk8 이후로 case 에서 문자열도 가능해졌다
-		switch(msg) {
+		String msg = sc.nextLine();
+
+		// jdk8 이후로 case 에서 문자열도 가능해졌다
+		switch (msg) {
 		case "red":
 		case "RED":
 			System.out.println("빨강색");
@@ -49,24 +49,3 @@ public class Ex2Switch {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

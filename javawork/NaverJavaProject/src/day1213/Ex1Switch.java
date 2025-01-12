@@ -4,10 +4,10 @@ public class Ex1Switch {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		//switch 문
-		int n=4;
+		// switch 문
+		int n = 4;
 
-		switch(n) {
+		switch (n) {
 		case 1:
 			System.out.println("one");
 			break;

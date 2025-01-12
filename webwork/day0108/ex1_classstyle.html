@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
         /* 범용 클래스 - 모든 태그에 적용하려면 .클래스명 */
-        .happy{
+        .happy {
             font-size: 20px;
             background-color: darkgray;
             border: solid 5px greenyellow;
         }
 
         /* 특정태그에서만 사용가능한 클래스 만들기*/
-        div.hello{
+        div.hello {
             color: orange;
             background-color: cyan;
             font-size: 2em;
@@ -21,7 +22,7 @@
         }
 
         /* id는 # 으로 표현,아이디는 고유이름이므로 앞에 태그는 안써도 된다 */
-        #one{
+        #one {
             border: dotted 2px gray;
             background-color: #fef;
         }
@@ -34,17 +35,18 @@
         } */
 
         /* > : 바로 아래 태그, 공백 : 모든 자식 태그*/
-        div.java>div{
+        div.java>div {
             font-family: 'impact';
             color: red;
         }
 
-        div.java>b{
+        div.java>b {
             font-size: 2em;
             font-style: italic;
         }
     </style>
 </head>
+
 <body>
     <span style="color: blueviolet;" class="happy"> 오늘은 수요일입니다</span>
     <br><br>
@@ -68,4 +70,5 @@
         <b>div class java 의 아래태그 b</b>
     </div>
 </body>
+
 </html>

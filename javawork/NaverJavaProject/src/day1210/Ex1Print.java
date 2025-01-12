@@ -6,6 +6,8 @@ public class Ex1Print {
 		// TODO Auto-generated method stub
 		System.out.println("안녕하세요!!");
 		System.out.println("Hello java!!!");
+		int n = 10;
+		System.out.println("n=" + n);
 	}
 
 }
