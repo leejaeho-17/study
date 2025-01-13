@@ -35,7 +35,35 @@
 <body>
     </div>
     <h4 class="alert alert-danger">table을 이용해서 2~9단 전체 구구단을 출력하시오</h4>
-       
+    <table class="table table-bordered" style="width: 95%;">
+        <caption align="top">
+            <h5>[전체 구구단]</h5>
+        </caption>
+        <thead>
+            <tr align="center">
+                <script>
+                    for (let dan = 2; dan <= 9; dan++) {
+                        document.write(`<td style="background-color:pink"><b>${dan}단</b></td>`)
+                    }
+                </script>
+            </tr>
+        </thead>
+        <tbody>
+            <script>
+                let s = "";
+                for (let i = 1; i <= 9; i++) {
+                    s += `<tr align="center">`;
+                    for (let dan = 2; dan <= 9; dan++) {
+                        s += `<td>
+                        ${dan}x${i}=${dan * i}`
+                    }
+                    s += `</tr>`;
+                }
+                document.write(s);
+            </script>
+        </tbody>
+    </table>
+
 </body>
 
 </html>
