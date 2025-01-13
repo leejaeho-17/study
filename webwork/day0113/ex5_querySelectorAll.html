@@ -53,6 +53,33 @@
             }
         }
     </script>
+    <hr>
+    <div class="cars">
+        <script>
+            for (let i = 1; i <= 15; i++) {
+                document.write(`<img src="../mycar/mycar${i}.png" style="width:120px;
+                height:120px;border:2px solid orange;margin:5px;">`);
+            }
+        </script>
+    </div>
+    <script>
+        //자동차에 마우스를 올리면 다른이미지로 바뀌고 벗어나면 다시 원래의 이미지로 변경
+        let cars = document.querySelectorAll("div.cars>img");
+        //console.log(cars.length);
+        for (let car of cars) {
+            let oldPhoto = "";
+            car.onmouseover = function () {
+                //마우스가 위치한 곳의 이미지를 얻기
+                oldPhoto = this.getAttribute("src");
+                console.log(oldPhoto);
+                //새로운 이미지로 변경
+                this.setAttribute("src", "../photo/k-049.png");
+            }
+            car.onmouseout = function () {
+                this.setAttribute("src", oldPhoto);
+            }
+        }
+    </script>
 </body>
 
 </html>
