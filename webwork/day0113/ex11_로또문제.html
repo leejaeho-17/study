@@ -50,12 +50,37 @@
             document.querySelector("#btnlotto").onclick = function () {
                 //6개 크기의 배열 선언
                 let num = new Array(6);
-
                 //배열에 중복되지 않은 1~45 의 난수를 구한다
-
+                for (let i = 0; i < num.length; i++) {
+                    let rndsu = parseInt(Math.random() * 45) + 1;
+                    num[i] = rndsu;
+                    for (let j = 0; j < i; j++) {
+                        if (num[i] == num[j]) {
+                            i--;
+                            break;
+                        }
+                    }
+                }
                 //오름차순으로 정렬한다
-
+                for (let i = 0; i < num.length; i++) {
+                    for (let j = i + 1; j < num.length; j++) {
+                        if (num[i] > num[j]) {
+                            let temp = num[i];
+                            num[i] = num[j];
+                            num[j] = temp;
+                        }
+                    }
+                }
                 //위의 변수 lotto에 정렬된 숫자를 넣어준다
+                let s = document.querySelectorAll("div.lotto");
+                for (let i = 0; i < 6; i++) {
+                    s[i].innerHTML = num[i];
+                    //<head>,</head> = <tag(태그)>
+                    //innerHTMl = tag 안에 들어가는 html
+                    //innerTEXT = tag 안에 들어가는 문자열
+                    //배열에 접근 할 땐 인덱스로 접근한다. ex) 변수명[숫자].~~
+                }
+                document.querySelectorAll(".lotto").innerHTML = num[i];
             }
         }
     </script>
