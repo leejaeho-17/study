@@ -40,12 +40,15 @@
             //오늘버튼 이벤트
             document.querySelector("#btntoday").onclick = function () {
                 //today로 변경
-                console.log(todayYear);
                 curYear = todayYear;
                 curMonth = todayMonth;
+
+                //select 도 현재년월로 변경
+                document.querySelector(".selyear").value = curYear;
+                document.querySelector(".selmonth").value = curMonth;
                 //달력 다시 출력
                 calendarView();
-                
+
             }
         }
         function calendarView() {
