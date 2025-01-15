@@ -15,7 +15,7 @@ window.onload = function () {
     let Photo = "";
     mycar[0].onmouseover = function () {
         Photo = this.getAttribute("src");
-        this.setAttribute = ("src","../photo/k-051.png");
+        this.setAttribute("src","../photo/k-051.png");
     }
     mycar[0].onmouseout = function () {
         this.setAttribute("src",Photo);
