@@ -35,28 +35,23 @@
         <h style=""><b>글꼴 모양을 선택하세요</b></h3>
             <div class="input-group">
                 <label>
-                    <input type="radio" class="form-check-input fcolor" value="red" 
-                    name="fontcolor">&nbsp;빨간색
+                    <input type="radio" class="form-check-input fcolor" value="red" name="fontcolor">&nbsp;빨간색
                 </label>
                 &nbsp;&nbsp;
                 <label>
-                    <input type="radio" class="form-check-input fcolor" value="black" 
-                    name="fontcolor">&nbsp;검정색
+                    <input type="radio" class="form-check-input fcolor" value="black" name="fontcolor">&nbsp;검정색
                 </label>
                 &nbsp;&nbsp;
                 <label>
-                    <input type="radio" class="form-check-input fcolor" value="orange" 
-                    name="fontcolor">&nbsp;오렌지색
+                    <input type="radio" class="form-check-input fcolor" value="orange" name="fontcolor">&nbsp;오렌지색
                 </label>
                 &nbsp;&nbsp;
                 <label>
-                    <input type="radio" class="form-check-input fcolor" value="pink" 
-                    name="fontcolor">&nbsp;분홍색
+                    <input type="radio" class="form-check-input fcolor" value="pink" name="fontcolor">&nbsp;분홍색
                 </label>
                 &nbsp;&nbsp;
                 <label>
-                    <input type="radio" class="form-check-input fcolor" value="blue" 
-                    name="fontcolor">&nbsp;파란색
+                    <input type="radio" class="form-check-input fcolor" value="blue" name="fontcolor">&nbsp;파란색
                 </label>
             </div>
             <div class="input-group" style="margin-top:30px;">
@@ -71,67 +66,73 @@
                     <option>single day</option>
                 </select>
             </div>
-            
+
             <div class="input-group" style="margin-top:30px;">
                 <h6>글자 크기 변경</h6>&nbsp;&nbsp;
-                <input type="range" id="fsize" min="10" max="50" step="2" 
-                value="30" style="width: 300px;">
+                <input type="range" id="fsize" min="10" max="50" step="2" value="30" style="width: 300px;">
                 <h6 class="fnum" style="margin-left: 10px;">30</h6>
 
             </div>
-            <button type="button" class="btn btn-outline-danger" id="btnresult" 
-            style="margin: 20px 50px;">글꼴에 적용한 값
-                적용하기</button>
 
             <div class="box" style="margin: 20px 20px;font-size: 
             30px;font-family: 'nanum pen script';">
-                안녕하세요, have a nice!!
+                안녕하세요, have a nice day!!!
             </div>
     </div>
     <script>
         //초기값으로 배경색 가져와서 적용시키기
-        $(".box").css("background-color",$("#bcolor").val());
-        $("#btnresult").click(function () {
-            //굵게
-            let b = $("#chk1").is(":checked");
-            if (b)
+        $(".box").css("background-color", $("#bcolor").val());
+
+        
+
+        //굵게 이벤트
+        $("#chk1").click(function () {
+            if ($(this).is(":checked"))
                 $(".box").css("font-weight", "bold");
             else
                 $(".box").css("font-weight", "normal");
-            //기울게
-            if ($("#chk2").is(":checked"))
+        });
+        //기울기 이벤트
+        $("#chk2").click(function () {
+            if ($(this).is(":checked"))
                 $(".box").css("font-style", "italic");
             else
                 $(".box").css("font-style", "normal");
-            //밑줄
-            if ($("#chk3").is(":checked"))
+        });
+        //밑줄 이벤트
+        $("#chk3").click(function () {
+            if ($(this).is(":checked"))
                 $(".box").css("text-decoration", "underline");
             else
                 $(".box").css("text-decoration", "none");
-            //글자색
-            //클래스로 선택된 값을 가져오기
-            // let fcolor = $(".fcolor:checked").val();
-            // $(".box").css("color",fcolor);
-
-            //name으로 선택된 값 가져오기
-            let fcolor = $("[name='fontcolor']:checked").val();
-            $(".box").css("color",fcolor);
-
-            //배경색 적용
-            $(".box").css("background-color",$("#bcolor").val());
-
-            //글꼴 적용
-            $(".box").css("font-family",$(".selfont").val());
-
-            //글자 크기 적용하기
-            $(".box").css("font-size",$("#fsize").val()+"px");
         });
+
+        //글자색 이벤트
+        $(".fcolor").click(function(){
+            $(".box").css("color",$(this).val());
+        });
+
+        //배경색 이벤트
+        $("#bcolor").change(function(){
+            $(".box").css("background-color",$(this).val());
+        });
+
+        //글꼴 이벤트
+        $(".selfont").change(function(){
+            $(".box").css("font-family",$(this).val());
+        });
+
         //range 이벤트
-        $("#fsize").change(function(){
+        $("#fsize").mousemove(function () {
             $(".fnum").text($(this).val());
+
+            $(".box").css("font-size",$(this).val()+"px");
         });
+
         
+
+
     </script>
 </body>
 
-</html> 
+</html>
