@@ -17,16 +17,21 @@
                 margin-top: 10px;
                 border: 1px solid;
                 cursor: pointer;
+                float: left;
+            }
+
+            div.a{
+                clear: both;
             }
         </style>
         <script>
-            $("div.box").each((idx,ele)=>{
-                let star = `<span>★★★★★</span>`;
-                $(this).
-            });
-
-            $("div.box").mouseover(function(){
-                $(this).text().text(star);
+            $(function(){
+                //상자에 마우스를 올리면 옆으로 별점 표시
+                $("div.box").mouseenter(function(){
+                    $(this).after("<b style='color:red'>★★★★★</b>");
+                    //부모의 형제들로 접근 후 하위태그 중 b 태그를 찾아서 제거하기
+                    $(this).parent().siblings().find("b").remove();
+                });
             });
         </script>
     </head>

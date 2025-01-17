@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Gaegu&family=Jua&family=Nanum+Pen+Script&family=Playwrite+AU+SA:wght@100..400&family=Single+Day&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+        <style>
+            body *{
+                font-family: 'jua';
+            }
+            div.photobox>figure {
+                float: left;
+                margin-right: 20px;
+                border: 2px solid gray;
+                padding: 10px;
+            }
+            div.photobox>figure>img {
+                width: 100px;
+                height: 100px;
+            }
+            div.photobox>figure>figcaption {
+                text-align: center;
+            }
+            div.photobox>figure>figcaption>.del {
+                color: red;
+                cursor: pointer;
+                font-size: 2em;
+                position: relative;
+                top: -150px;
+                left: 50px;
+            }
+            
+        </style>
+
+    </head>
+    <body>
+        <!-- 
+        1. 이미지명을 배열에 10개정도 넣은후  $.each 문을 이용해서 넣어주세요
+        2. X 아이콘을 클릭하면 해당 상품만 삭제
+        3. 삭제 체크박스를 클릭한후 [선택한 상품 삭제하기] 버튼클릭시 체크한상품 전체 삭제
+        4. 체크한 상품이 없을경우 alert 으로 “삭제할 상품을 선택해주세요”
+        -->
+        <button type="button" class="btn btn-danger btn1" style="position: relative; left: 200px;">선택한 상품 삭제하기</button>
+
+        <div class="photobox" style="margin: 20px;"></div>
+        <script>
+            let photo = [
+            {"img":"../photo/1.jpg","title":"여진구","name":"delete"},
+            {"img":"../photo/2.jpg","title":"김우빈","name":"delete"},
+            {"img":"../photo/3.jpg","title":"최다니엘","name":"delete"},
+            {"img":"../photo/4.jpg","title":"박서준","name":"delete"},
+            {"img":"../photo/5.jpg","title":"최지우","name":"delete"},
+            {"img":"../photo/6.jpg","title":"한예슬","name":"delete"},
+            {"img":"../photo/7.jpg","title":"황정음","name":"delete"},
+            {"img":"../photo/8.jpg","title":"전지현","name":"delete"},
+            {"img":"../photo/9.jpg","title":"강동원","name":"delete"},
+            {"img":"../photo/10.jpg","title":"김태희","name":"delete"}
+            ];
+
+            let s = "";
+            $.each(photo,(idx,item)=>{
+                s += `
+                    <figure>
+                        <img src="${item.img}" width=100>
+                        <figcaption>
+                            <h5>${item.title}</h5>
+                            <i class="bi bi-balloon-heart del"></i>
+                            <input type="checkbox" name="delete" value="삭제">&nbsp삭제
+                        </figcaption>
+                    </figure>
+                `;
+            });
+            $("div.photobox").html(s);
+
+            $(".del").click(function(){
+                $(this).parents("figure").remove();
+            });
+            $(".btn1").click(function(){
+                let del = $("input[name='delete']:checked").length
+                if (del == 0)
+                     alert("삭제할 상품을 선택해주세요")
+                else {
+                     //alert($("input[name='delete']:checked").length)
+                    $("input[name='delete']:checked").each((idx,item)=>{
+                        $(item).parents("figure").remove();
+                    });
+                }
+            
+            }); 
+        </script>
+    </body>
+</html>
