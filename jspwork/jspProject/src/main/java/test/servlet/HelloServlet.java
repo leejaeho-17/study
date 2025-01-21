@@ -13,7 +13,8 @@ import java.io.IOException;
 @WebServlet("/bitcamp/hello")
 public class HelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+       	
+	String name = "hong gil dong";
     /**
      * @see HttpServlet#HttpServlet()
      */
