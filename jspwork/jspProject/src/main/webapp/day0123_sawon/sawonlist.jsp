@@ -44,6 +44,14 @@ $(function() {
 		//목록파일로 이동 - 검색 단어는 get 방식으로 전달
 		location.href = "./sawonlist.jsp?search="+search;
 	});
+	
+	//검색 단어를 입력 후 엔터를 누르면 검색하기
+	$("#search").keyup(function (e) {
+		if(e.keyCode == 13) {
+			//검색버튼 클릭 이벤트 강제 호출
+			$("#btnsearch").trigger("click");
+		}
+	})
 });
 </script>
 </head>
