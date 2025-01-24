@@ -79,7 +79,7 @@ $(function() {
 		<tr>
 			<td colspan="4">
 			<div class="input-group">
-				<b>이름검색</b>&nbsp;&nbsp;
+				<b>이름검색</b>&nbsp;&nbsp;                                                               
 				<i class="bi bi-search"></i>
 				<input type="text" id="search" placeholder="검색할 이름 입력"
 				class="form-control">
