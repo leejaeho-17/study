@@ -125,4 +125,55 @@ public class SimpleBoardDao {
 			db.dbClose(pstmt, conn);
 		}
 	}
+	
+	public void deleteBoard(int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		String sql = """
+				delete from simpleboard where num = ?
+				""";
+
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, num);
+
+			pstmt.execute();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	
+	public void updateBoard(SimpleBoardDto dto) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		String sql = """
+				update simpleboard set writer=?, subject=?, content=? where num = ?
+				""";
+
+		conn = db.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setString(1, dto.getWriter());
+			pstmt.setString(2, dto.getSubject());
+			pstmt.setString(3, dto.getContent());
+			pstmt.setInt(4, dto.getNum());
+
+			pstmt.execute();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 }

@@ -54,8 +54,7 @@ body * {
 				<td colspan="2">
 					<textarea style="width: 100%;height: 150px;" 
 					class="form-control" name="content" 
-					required="required">
-					</textarea>
+					required="required"></textarea>
 				</td>
 			</tr>
 			<tr>
