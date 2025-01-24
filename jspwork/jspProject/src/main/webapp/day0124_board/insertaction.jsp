@@ -16,8 +16,11 @@
 	//5. boardlist.jsp 로 이동
 	response.sendRedirect("./boardlist.jsp");
 %> --%>
+<!-- useBean : 클래스 생성 -->
 <jsp:useBean id="dao" class="simpleboard.data.SimpleBoardDao"/>
 <jsp:useBean id="dto" class="simpleboard.data.SimpleBoardDto"/>
+
+<!-- dto 와 이름이 같은 폼 태그를 읽어서 자동으로 dto 에 넣어준다(property="*") -->
 <jsp:setProperty property="*" name="dto"/>
 <%
 	dao.insertBoard(dto);

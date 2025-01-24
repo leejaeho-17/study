@@ -80,6 +80,9 @@ body * {
 				<tr align="center">
 					<td><%=no--%></td>
 					<td align="left">
+					<!-- 제목이 너무 긴 경우 200px 로 자르기, 뒤에 ... 으로 나옴 -->
+					<div style="text-overflow: ellipsis;overflow: hidden;
+					white-space: nowrap;display: block;max-width: 200px">
 						<a href="./contentdetail.jsp?num=<%=dto.getNum()%>">
 						<%=dto.getSubject()%></a>
 					</td>
