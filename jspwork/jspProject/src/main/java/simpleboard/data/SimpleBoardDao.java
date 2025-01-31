@@ -18,7 +18,11 @@ public class SimpleBoardDao {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "select * from simpleboard order by num desc";
+		String sql = """
+				select *,
+				(select count(*) from simpleanswer a where a.num = b.num) count
+				from simpleboard b
+				""";
 
 		conn = db.getConnection();
 

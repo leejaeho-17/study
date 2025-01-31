@@ -96,7 +96,7 @@ body * {
 	 			for(SimpleAnswerDto adto:alist) {%>
 	 				[<%=adto.getNickname()%>]&nbsp;
 	 				<%=adto.getContent()%> &nbsp;&nbsp;
-	 				<i class="bi bi-trash answerdel"></i>
+	 				<i class="bi bi-trash answerdel" idx="<%=adto.getIdx()%>"></i>
 	 				<span class="day">
 	 					<%=sdf.format(adto.getWriteday())%>
 	 				</span>
@@ -104,6 +104,19 @@ body * {
 	 				<br>
 	 			<%}
 	 			%>
+	 			
+	 			<!-- 댓글 삭제 이벤트 -->
+	 			<script type="text/javascript">
+	 				$(".answerdel").click(function() {
+						let ans = confirm("현재 댓글을 삭제할까요 ?")
+						//태그 안의 idx 값 얻기
+						let idx = $(this).attr("idx");
+						let num=<%=num%>;
+						//삭제페이지로 이동
+						//idx 는 삭제에 필요함, num 은 삭제 후 상세페이지로 돌아오기 위해 필요함
+						location.href="./answerdelete.jsp?idx="+idx+"&num="+num;
+					});
+	 			</script>
 	 			<form action="./answeraction.jsp" method="post">
 	 				<input type="hidden" name="num" value="<%=num%>">
 	 				<div class="input-group">

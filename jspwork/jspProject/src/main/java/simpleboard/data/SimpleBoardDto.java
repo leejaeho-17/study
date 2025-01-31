@@ -9,7 +9,9 @@ public class SimpleBoardDto {
 	private String	content;
 	private int readcount;
 	private Timestamp writeday;
+	private int count;
 	
+
 	public SimpleBoardDto() {
 		// TODO Auto-generated constructor stub
 	}
@@ -67,5 +69,13 @@ public class SimpleBoardDto {
 
 	public void setWriteday(Timestamp writeday) {
 		this.writeday = writeday;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 }
