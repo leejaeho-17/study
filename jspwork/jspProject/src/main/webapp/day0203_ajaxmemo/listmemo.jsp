@@ -15,6 +15,37 @@
                 font-family: 'jua';
             }
         </style>
+        <script type="text/javascript">
+        $(function () {
+			list();//처음 로딩시 전체메모 출력
+			
+			//저장버튼이벤트
+			$("#btnsave").click(function () {
+				let avata = $("#selavata").val();
+				let nickname = $("#nickname").val();
+				let message = $("#message").val();
+				
+				$.ajax({
+					type:"get",
+					dataType:"xml",
+					data:{"avata":avata,"nickname":nickname,"message":message},
+					url:"./insertmemo.jsp",
+					success:function(res) {
+						alert($(res).find("result").text());
+						
+						$("#nickname").val("");
+						$("#message").val("");
+						//목록 다시 출력
+						list();
+					}
+				});
+			});
+		});
+        
+        function list() {
+			
+		}
+        </script>
     </head>
     <body>
     <div style="margin: 20px;">
@@ -50,6 +81,10 @@
 			<button type="button" class="btn btn-sm btn-success"
 			id="btnsave">저장</button>
     	</div>
+    	
+    	<!-- 출력할 위치 -->
+    	<div class="memolist alert alert-warning" 
+    	style="margin-top: 10px;width: 350px;">111</div>
     </div> 
     </body>
 </html>
