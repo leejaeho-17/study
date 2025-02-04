@@ -1,90 +1,28 @@
+<%@page import="org.json.simple.JSONObject"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="org.json.simple.JSONArray"%>
+<%@page import="com.mysql.cj.xdevapi.JsonArray"%>
+<%@page import="memo.data.MemoDto"%>
+<%@page import="java.util.List"%>
+<%@page import="memo.data.MemoDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Gaegu&family=Jua&family=Nanum+Pen+Script&family=Playwrite+AU+SA:wght@100..400&family=Single+Day&display=swap" rel="stylesheet">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
-        <style>
-            body *{
-                font-family: 'jua';
-            }
-        </style>
-        <script type="text/javascript">
-        $(function () {
-			list();//처음 로딩시 전체메모 출력
-			
-			//저장버튼이벤트
-			$("#btnsave").click(function () {
-				let avata = $("#selavata").val();
-				let nickname = $("#nickname").val();
-				let message = $("#message").val();
-				
-				$.ajax({
-					type:"get",
-					dataType:"xml",
-					data:{"avata":avata,"nickname":nickname,"message":message},
-					url:"./insertmemo.jsp",
-					success:function(res) {
-						alert($(res).find("result").text());
-						
-						$("#nickname").val("");
-						$("#message").val("");
-						//목록 다시 출력
-						list();
-					}
-				});
-			});
-		});
-        
-        function list() {
-			
-		}
-        </script>
-    </head>
-    <body>
-    <div style="margin: 20px;">
-    	<h5 class="alert alert-danger">Memo Ajax CRUD</h5>
-    	
-    	<div class="input-group" style="width:350px;">
-    		<select id="selavata">
-    			<option value="../image/avata/s1.JPG">스웨터소년</option>
-    			<option value="../image/avata/s3.JPG">파란원피스소녀</option>
-    			<option value="../image/avata/s5.JPG">핑크원피스소녀</option>
-    			<option value="../image/avata/s10.JPG">피아노치는소년</option>
-    			<option value="../image/avata/s4.JPG">신난스누피</option>
-    		</select>
-    		&nbsp;
-    		<img src="" class="photoavata" width="40">
-    		
-    		<script type="text/javascript">
-    			$(".photoavata").attr("src",$("#selavata").val());
-    			//이벤트
-    			
-    			$("#selavata").change(function(){
-        			$(".photoavata").attr("src",$(this).val());
-    			});
-    		</script>
-    		
-    		<input type="text" class="form-control" id="nickname"
-    		placeholder="닉네임">
-    	</div>
-    	<div class="input-group" style="width:350px;margin-top: 10px;">
-			<input type="text" id="message" class="form-control"
-			placeholder="메세지 입력">
-			&nbsp;&nbsp;
-			<button type="button" class="btn btn-sm btn-success"
-			id="btnsave">저장</button>
-    	</div>
-    	
-    	<!-- 출력할 위치 -->
-    	<div class="memolist alert alert-warning" 
-    	style="margin-top: 10px;width: 350px;">111</div>
-    </div> 
-    </body>
-</html>
+<%
+ 	MemoDao dao = new MemoDao();
+	List<MemoDto> list = dao.getAllMemos();
+	
+	JSONArray arr = new JSONArray();
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	
+	for(MemoDto dto:list) {
+		JSONObject ob = new JSONObject();
+		ob.put("idx", dto.getIdx());
+		ob.put("nickname", dto.getNickName());
+		ob.put("avata", dto.getAvata());
+		ob.put("message", dto.getMessage());
+		ob.put("writeday", sdf.format(dto.getWriteday()));
+		
+		arr.add(ob);
+	}
+%>
+<%=arr%>
