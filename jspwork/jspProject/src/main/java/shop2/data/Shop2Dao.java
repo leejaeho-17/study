@@ -39,6 +39,41 @@ public class Shop2Dao {
 		}
 	}
 	
+	public Shop2Dto getSangpum(int num) {
+		Shop2Dto dto = new Shop2Dto();
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		String sql = "select * from shop where num = ?";
+		
+		conn = db.getNaverConnection();
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, num);
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				dto.setNum(rs.getInt("num"));
+				dto.setSangpum(rs.getString("sangpum"));
+				dto.setScolor(rs.getString("scolor"));
+				dto.setScnt(rs.getInt("scnt"));
+				dto.setSprice(rs.getInt("sprice"));
+				dto.setSphoto(rs.getString("sphoto"));
+				dto.setIpgoday(rs.getString("ipgoday"));
+				dto.setWriteday(rs.getTimestamp("writeday"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+		return dto;
+	}
+	
 	//order :1.등록순, 2.높은가격순, 3.낮은가격순, 4.상품명순
 	public List<Shop2Dto> getAllSangpums(int order) {
 		
