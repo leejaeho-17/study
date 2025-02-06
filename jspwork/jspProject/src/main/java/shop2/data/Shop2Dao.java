@@ -73,6 +73,56 @@ public class Shop2Dao {
 		}
 		return dto;
 	}
+	public void deleteShop (int num) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = "delete from shop where num = ?";
+		
+		conn = db.getNaverConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			//바인딩 5개
+			pstmt.setInt(1, num);
+			//실행
+			pstmt.execute();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
+	
+	public void updateShop(Shop2Dto dto)
+	{
+		Connection conn=null;
+		PreparedStatement pstmt=null;
+		String sql="""
+				update shop set sangpum=?,scolor=?,scnt=?,sprice=?,
+				sphoto=?,ipgoday=? where num=?	
+				""";
+		conn=db.getNaverConnection();
+		try {
+			pstmt=conn.prepareStatement(sql);
+			//바인딩
+			pstmt.setString(1, dto.getSangpum());
+			pstmt.setString(2, dto.getScolor());
+			pstmt.setInt(3, dto.getScnt());
+			pstmt.setInt(4, dto.getSprice());
+			pstmt.setString(5, dto.getSphoto());
+			pstmt.setString(6, dto.getIpgoday());
+			pstmt.setInt(7, dto.getNum());
+			//실행
+			pstmt.execute();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally {
+			db.dbClose(pstmt, conn);
+		}
+	}
 	
 	//order :1.등록순, 2.높은가격순, 3.낮은가격순, 4.상품명순
 	public List<Shop2Dto> getAllSangpums(int order) {

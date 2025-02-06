@@ -63,14 +63,14 @@
         	margin-right: 5px;
         }
         
-        div.scolor {
+        div.scolor{
         	position: relative;
-        	left: 130px;
-        	top: -40px;
-        	width: 30px;
+        	left:130px;
+        	top:-50px;
+        	width:30px;
         	height: 30px;
         	border-radius: 100px;
-        	border: 1px solid black; 
+        	border:1px solid black;
         }
      </style>
      <script type="text/javascript">
@@ -115,12 +115,12 @@
 			});
     	});
     	 
-    	//상세보기 클릭 시 이벤트
+    	//상세보기 클릭시 이벤트
     	$(document).on("click","i.detail",function(){
-    		let num = $(this).attr("num")
-    		
-    		location.href = "./shopdetail.jsp?num="+num;
-    	})
+    		let num=$(this).attr("num");
+    		//상세페이지로 이동
+    		location.href="./shopdetail.jsp?num="+num;
+    	});
      });
      
      function list()
@@ -177,8 +177,8 @@
     		});
     		s+="</tbody></table>";
     	 }else{
-    		$.each(res,function(idx,ele) {
-    			s += `
+    		$.each(res,function(idx,ele){
+    			s+=`
     				<div class="grid">
     					<img src="${ele.sphoto}">
     					<br><br>
@@ -186,6 +186,7 @@
     					<h6>${ele.sprice}원</h6>
     					<div style="background-color:${ele.scolor}" class="scolor"></div>
     				</div>
+    				
     			`;
     		});
     	 }
@@ -297,7 +298,7 @@
 <!-- 상품등록 폼 끝 -->
 
 
-<div style="margin: 20px;width:500px;">
+<div style="margin: 20px;width:550px;">
 	<h5 class="alert alert-success" style="text-align: center;">[전체 상품 목록]</h5>
 
    <div class="input-group">
