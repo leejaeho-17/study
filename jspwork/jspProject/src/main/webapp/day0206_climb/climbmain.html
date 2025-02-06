@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>502 html study</title>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Gaegu&family=Jua&family=Nanum+Pen+Script&family=Playwrite+AU+SA:wght@100..400&family=Single+Day&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+        
+        <style>
+        body *{
+            font-family: 'jua';
+        }
+        
+        div.liststyle{
+        	margin: 20px 200px;
+        }
+        
+        div.liststyle i{
+        	font-size: 20px;
+        	cursor: pointer;
+        	margin-right: 10px;
+        }
+        
+        div.grid{
+        	float: left;
+        	width: 170px;
+        	height: 250px;
+        	border: 1px solid gray;
+        	border-radius: 20px;
+        	padding-top: 10px;
+        	text-align: center;
+        	margin: 5px;
+        	background-color:#ffe4e1; 
+        }
+        
+        div.grid img{
+        	width: 140px;
+        	height: 160px;
+        	border: 1px solid orange;
+        	border-radius: 20px;
+        }
+        .tab1 {
+        	width: 550px;
+        }
+        .tab1 thead th{
+        	text-align: center;
+        	font-size: 0.9em;
+        	background-color: #ffe4e1;
+        }
+        
+        .tab1 tbody td{
+        	text-align: center;
+        	font-size: 0.9em;
+        	background-color: #f0fff0;
+        }
+        
+        .tab1 img{
+        	width: 30px;
+        	height: 30px;
+        	border:1px solid gray;
+        	margin-right: 5px;
+        }
+    </style>
+    <script type="text/javascript">
+   		let view="list";
+
+    	$(function(){
+    		
+    	//list 모양 디폴트값을 list 모양으로
+       	 $("div.liststyle i:eq(1)").css("color","red");
+       	 
+       	 //목록모양 변경하는 이벤트
+       	 $("div.liststyle i").click(function(){
+       		view=$(this).attr("view");
+       		//alert(view);
+       		
+       		$(this).siblings().css("color","black");//형제태그의 글자색을 black으로
+       		$(this).css("color","red");
+       		
+       		list();//바뀐 모양으로 다시 출력
+       	 });
+       	 
+    		list();
+    		$("#climbform").submit(function(e){
+        		
+    	        e.preventDefault(); // 기본 폼 제출 방지
+    			$.ajax({
+    				type:"get",
+    				dataType:"html",
+    				data:$(this).serialize(),
+    				url:"./insertclimb.jsp",
+    				success:function(){
+    					alert("클라이밍장이 추가되었습니다");
+    					//입력값 초기화
+    					$("#cname").val("");
+    					$("#cprice").val("");    					
+    					//목록 다시 출력하기
+    					list();
+    				}
+    			});
+        	});
+    		
+    		//상세보기 클릭시 이벤트
+        	$(document).on("click","i.detail",function(){
+        		let num=$(this).attr("num");
+        		//상세페이지로 이동
+        		location.href="./climbdetail.jsp?num="+num;
+        	});
+         
+    	});
+    	function list() {        	
+        	$.ajax({
+        		type:"get",
+        		dataType:"json",
+        		url:"./listclimb.jsp",
+        		success:function(res){
+        			writedata(res);
+        		}
+        	});
+    	}
+    	
+    	function writedata(res)
+        {	
+       	 let s="";
+       	if(view=='list'){
+       		s=`
+       			<table class="table table-bordered tab1">
+       				<thead>
+   	    				<th width="50">번호</th>
+   	    				<th width="170">클라이밍장 이름</th>
+   	    				<th width="100">일일권 가격</th>
+   	    				<th width="140">방문일자</th>
+   	    				<th>상세보기</th>
+     					</thead>
+       				<tbody>    			
+       		`;
+       		$.each(res,function(idx,ele){
+       			s+=`    			
+       				<tr>
+       					<td>${idx+1}</td>
+       					<td style="text-align:left;">
+       						<img src="${ele.cphoto}">
+       						${ele.cname}
+       					</td>
+       					<td>${ele.cprice}</td>
+       					<td>${ele.cday}</td>
+       					<td>
+       						<i class="bi bi-person-lines-fill detail"
+       						style="font-size:1.5em;cursor:pointer;"
+       						num="${ele.num}"></i>
+       					</td>
+       					
+       				</tr>
+       			`;
+       		});
+       		s+="</tbody></table>";
+       	} else {
+       		$.each(res,function(idx,ele){
+    			s+=`
+    				<div class="grid">
+    					<img src="${ele.cphoto}">
+    					<h6>${ele.cname}</h6>
+    					<h6>${ele.cprice}원</h6>
+    					
+    					<h6>상세보기 => <i class="bi bi-person-lines-fill detail"
+       						style="font-size:1.5em;cursor:pointer;"
+           						num="${ele.num}"></i></h6>
+    				</div>
+    				
+    			`;
+    		});
+       	}
+       	$("div.result").html(s);
+       	
+    }
+        
+    </script>
+    </head>
+    <body>
+    <!-- 상품 추가 다이얼로그 -->
+<div class="modal" id="myClimbModal">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">다녀온 암장 등록</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+       
+       <!-- 이번에 수정은 폼단위로 값을 얻어보자 -->
+       <form id="climbform">
+       	  
+		<table class="table table-bordered">
+			<tr>
+				<td width="100" style="background-color: lightgray;">클라이밍장 사진</td>
+				<td>
+					<select id="cphoto" name="cphoto" class="form-select">
+						  <script>
+						  	for(let i=1;i<=4;i++){
+						  		let s=`<option value='../image/climb/${i}.png'>클라이밍장 ${i}</option>`;
+						  		document.write(s);
+						  	}
+						  </script>		
+					 </select>
+					 <br>
+					<img src="" class="climbphoto" width="100">
+					
+					<script type="text/javascript">
+						$(".climbphoto").attr("src",$("#cphoto").val());
+						
+						//이벤트
+						$("#cphoto").change(function(){
+							$(".climbphoto").attr("src",$(this).val());
+						});
+					</script>
+			 </td>
+			</tr>
+			<tr>
+				<td style="background-color: lightgray;">클라이밍장 이름</td>
+				<td>
+					<input type="text" name="cname" id="cname"
+				class="form-control">	
+				</td>
+			</tr>
+			<tr>
+				<td style="background-color: lightgray;">일일권 가격</td>
+				<td>
+					<input type="number" name="cprice" id="cprice" 
+					  class="form-control" min="0">
+				</td>
+			</tr>
+			<tr>
+				<td style="background-color: lightgray;">방문일자</td>
+				<td>
+					<input type="date" name="cday" id="cday" 
+					  class="form-control" value="2025-01-01">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<button type="submit"  data-bs-dismiss="modal"
+					style=width:120px;"
+					class="btn btn-sm btn-success">등록하기</button>
+				</td>
+			</tr>			
+		</table>
+			
+       </form>
+      </div>
+      
+       <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" 
+        data-bs-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+    <div style="margin: 20px;width:550px;">
+    	<h5 class="alert alert-danger" style="text-align: center;">[Lee's 돌잡이 리뷰]</h5>
+    	
+  		<div>
+  		<button type="button" class="btn btn-sm btn-outline-secondary"
+		id="btnaddmodal"
+		data-bs-toggle="modal" data-bs-target="#myClimbModal">리뷰등록</button>
+  		</div>
+    </div>
+    <div class="liststyle">
+		<i class="bi bi-grid" view="grid"></i>
+		<i class="bi bi-card-list" view="list"></i>
+	</div>
+    <div style="margin-top: 20px;" class="result">
+		111
+	</div>
+    </body>
+</html>

@@ -9,7 +9,7 @@ import java.util.Vector;
 
 import db.connect.MysqlConnect;
 
-public class ShopRepltDao {
+public class ShopRepleDao {
 	MysqlConnect db = new MysqlConnect();
 	
 	public void insertRelpe(ShopRepleDto dto) {

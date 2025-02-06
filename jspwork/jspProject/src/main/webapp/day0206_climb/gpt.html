@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>502 html study</title>
+        <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Gaegu&family=Jua&family=Nanum+Pen+Script&family=Playwrite+AU+SA:wght@100..400&family=Single+Day&display=swap" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
+        <style>
+        body *{
+            font-family: 'jua';
+        }
+        
+        /* 🧗 후기 전체 영역 스타일 */
+.review-container {
+    margin: 20px 200px;
+}
+
+/* 🏷️ 후기 박스 스타일 */
+.review-box {
+    background-color: #fff7f1; /* 부드러운 배경색 */
+    border: 1px solid #ffadad; /* 연한 빨강 테두리 */
+    border-radius: 10px; /* 둥근 모서리 */
+    padding: 10px;
+    margin-bottom: 15px; /* 후기 간격 */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
+}
+
+/* ⭐ 별점 스타일 */
+.review-stars {
+    color: #ffcc00; /* 노란색 별 */
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+/* 📝 후기 내용 스타일 */
+.review-text {
+    font-size: 14px;
+    color: #333;
+    line-height: 1.4;
+}
+
+/* 🕒 후기 날짜 스타일 */
+.review-date {
+    font-size: 12px;
+    color: #777;
+    text-align: right;
+}
+
+/* 💬 후기 입력 폼 스타일 */
+.review-form {
+    background-color: #fff3e6; /* 따뜻한 오렌지톤 배경 */
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 📩 입력창 스타일 */
+.review-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ffadad;
+    border-radius: 5px;
+}
+
+/* 📤 등록 버튼 스타일 */
+.review-submit-btn {
+    background-color: #ff6b6b;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.review-submit-btn:hover {
+    background-color: #ff4d4d;
+}
+        
+    </style>
+    </head>
+    <body>
+        <!-- 🧗‍♂️ 클라이밍 후기 영역 -->
+<div class="review-container">
+    <h5>📝 클라이밍장 후기</h5>
+<iframe width="560" height="315" src="https://youtube.com/shorts/sxvnw6djbnI?si=Q1tbZ86gbmMOPxjj" frameborder="0" allowfullscreen></iframe>
+
+    <!-- 📩 후기 입력 폼 -->
+    <div class="review-form">
+        <select class="form-select selstar" style="width: 70px;">
+            <option value="5">⭐⭐⭐⭐⭐ (5점)</option>
+            <option value="4">⭐⭐⭐⭐ (4점)</option>
+            <option value="3">⭐⭐⭐ (3점)</option>
+            <option value="2">⭐⭐ (2점)</option>
+            <option value="1">⭐ (1점)</option>
+        </select>
+        <input type="text" id="message" class="review-input"
+            placeholder="후기를 써보세요 😊">
+        <button type="button" class="review-submit-btn" id="btnreple">
+            등록
+        </button>
+    </div>
+
+    <!-- 💬 후기 목록 -->
+    <div class="review-list">
+        <div class="review-box">
+            <div class="review-stars">⭐⭐⭐⭐⭐</div>
+            <p class="review-text">정말 멋진 클라이밍장이에요! 직원들도 친절하고 시설도 깨끗해요.</p>
+            <p class="review-date">2025-02-06</p>
+        </div>
+        <div class="review-box">
+            <div class="review-stars">⭐⭐⭐</div>
+            <p class="review-text">가격이 조금 비싸지만 시설이 좋습니다.</p>
+            <p class="review-date">2025-02-05</p>
+        </div>
+    </div>
+</div>
+       <script type="text/javascript">
+       $(document).ready(function () {
+    	    // 후기 등록 버튼 클릭 시
+    	    $("#btnreple").on("click", function () {
+    	        let score = $(".selstar").val(); // 선택한 별점
+    	        let message = $("#message").val().trim(); // 입력한 후기 내용
+
+    	        if (message === "") {
+    	            alert("후기를 입력해주세요!");
+    	            return;
+    	        }
+
+    	        let stars = "⭐".repeat(score); // 별 개수 생성
+
+    	        // 새로운 후기 추가
+    	        let newReview = `
+    	            <div class="review-box">
+    	                <div class="review-stars">${stars}</div>
+    	                <p class="review-text">${message}</p>
+    	                <p class="review-date">${new Date().toISOString().split('T')[0]}</p>
+    	            </div>
+    	        `;
+    	        $(".review-list").prepend(newReview); // 최신 후기를 맨 위에 추가
+
+    	        $("#message").val(""); // 입력 필드 초기화
+    	    });
+    	});
+
+       </script>
+    </body>
+</html>
