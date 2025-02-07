@@ -9,17 +9,18 @@
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.0/font/bootstrap-icons.css">
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-        
         <style>
         body *{
-            font-family: 'jua';
+            font-family: 'jua';   
         }
+        
         
         div.liststyle{
         	margin: 20px 200px;
         }
         
         div.liststyle i{
+        	color : white;
         	font-size: 20px;
         	cursor: pointer;
         	margin-right: 10px;
@@ -34,7 +35,7 @@
         	padding-top: 10px;
         	text-align: center;
         	margin: 5px;
-        	background-color:#ffe4e1; 
+        	background-color: #778899; 
         }
         
         div.grid img{
@@ -49,13 +50,13 @@
         .tab1 thead th{
         	text-align: center;
         	font-size: 0.9em;
-        	background-color: #ffe4e1;
+        	background-color:#778899;
         }
         
         .tab1 tbody td{
         	text-align: center;
         	font-size: 0.9em;
-        	background-color: #f0fff0;
+        	background-color: #778899;
         }
         
         .tab1 img{
@@ -64,6 +65,13 @@
         	border:1px solid gray;
         	margin-right: 5px;
         }
+        
+        .tab2 {
+        	background-image: url('../image/climb/background.png');
+        	background-size: cover; 
+            background-position: center;
+            background-attachment: fixed;
+        }
     </style>
     <script type="text/javascript">
    		let view="list";
@@ -71,14 +79,14 @@
     	$(function(){
     		
     	//list 모양 디폴트값을 list 모양으로
-       	 $("div.liststyle i:eq(1)").css("color","red");
+       	 $("div.liststyle i:eq(1)").css("color","white");
        	 
        	 //목록모양 변경하는 이벤트
        	 $("div.liststyle i").click(function(){
        		view=$(this).attr("view");
        		//alert(view);
        		
-       		$(this).siblings().css("color","black");//형제태그의 글자색을 black으로
+       		$(this).siblings().css("color","white");//형제태그의 글자색을 white으로
        		$(this).css("color","red");
        		
        		list();//바뀐 모양으로 다시 출력
@@ -97,7 +105,8 @@
     					alert("클라이밍장이 추가되었습니다");
     					//입력값 초기화
     					$("#cname").val("");
-    					$("#cprice").val("");    					
+    					$("#cprice").val("");
+    					$("#curl").val("");
     					//목록 다시 출력하기
     					list();
     				}
@@ -149,7 +158,7 @@
        					<td>${ele.cprice}</td>
        					<td>${ele.cday}</td>
        					<td>
-       						<i class="bi bi-person-lines-fill detail"
+       						<i class="bi bi-bricks detail"
        						style="font-size:1.5em;cursor:pointer;"
        						num="${ele.num}"></i>
        					</td>
@@ -166,7 +175,7 @@
     					<h6>${ele.cname}</h6>
     					<h6>${ele.cprice}원</h6>
     					
-    					<h6>상세보기 => <i class="bi bi-person-lines-fill detail"
+    					<h6>상세보기 => <i class="bi bi-bricks detail"
        						style="font-size:1.5em;cursor:pointer;"
            						num="${ele.num}"></i></h6>
     				</div>
@@ -200,7 +209,7 @@
        	  
 		<table class="table table-bordered">
 			<tr>
-				<td width="100" style="background-color: lightgray;">클라이밍장 사진</td>
+				<td width="200" style="background-color: lightgray;">클라이밍장 사진</td>
 				<td>
 					<select id="cphoto" name="cphoto" class="form-select">
 						  <script>
@@ -245,6 +254,13 @@
 				</td>
 			</tr>
 			<tr>
+				<td style="background-color: lightgray;">홈페이지 링크</td>
+				<td>
+					<input type="text" name="curl" id="curl" 
+					  class="form-control">
+				</td>
+			</tr>
+			<tr>
 				<td colspan="2" align="center">
 					<button type="submit"  data-bs-dismiss="modal"
 					style=width:120px;"
@@ -265,21 +281,36 @@
     </div>
   </div>
 </div>
-    <div style="margin: 20px;width:550px;">
-    	<h5 class="alert alert-danger" style="text-align: center;">[Lee's 돌잡이 리뷰]</h5>
-    	
-  		<div>
-  		<button type="button" class="btn btn-sm btn-outline-secondary"
-		id="btnaddmodal"
-		data-bs-toggle="modal" data-bs-target="#myClimbModal">리뷰등록</button>
-  		</div>
-    </div>
-    <div class="liststyle">
-		<i class="bi bi-grid" view="grid"></i>
-		<i class="bi bi-card-list" view="list"></i>
-	</div>
-    <div style="margin-top: 20px;" class="result">
-		111
-	</div>
-    </body>
+	<table class="tab2">
+		<tr>
+			<td>
+				<div style="margin: 20px; width: 550px;">
+					<h5 class="alert alert-warning" style="text-align: center;">
+						[Lee's 돌잡이 리뷰]<i class="bi bi-bookmark-check-fill"></i>
+					</h5>
+
+					<div>
+						<button type="button" class="btn btn-sm btn-light"
+							id="btnaddmodal" data-bs-toggle="modal"
+							data-bs-target="#myClimbModal">리뷰등록</button>
+					</div>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div class="liststyle">
+					<i class="bi bi-grid" view="grid"></i> <i class="bi bi-card-list"
+						view="list"></i>
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<div style="margin-top: 20px; width: 550px;" class="result">
+					111</div>
+			</td>
+		</tr>
+	</table>
+</body>
 </html>

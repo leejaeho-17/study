@@ -1,5 +1,5 @@
-<%@page import="shop2.data.ShopRepleDao"%>
-<%@page import="shop2.data.ShopRepleDto"%>
+<%@page import="climb.data.ClimbRepleDao"%>
+<%@page import="climb.data.ClimbRepleDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -7,8 +7,8 @@
 	int star = Integer.parseInt(request.getParameter("star"));
 	String message = request.getParameter("message");
 	
-	ShopRepleDto dto = new ShopRepleDto(num,star,message);
+	ClimbRepleDto dto = new ClimbRepleDto(num,star,message);
 	
-	ShopRepleDao dao = new ShopRepleDao();
+	ClimbRepleDao dao = new ClimbRepleDao();
 	dao.insertRelpe(dto);
 %>

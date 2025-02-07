@@ -27,15 +27,122 @@
         <style>
             body *{
                 font-family: 'jua';
+                
             }
+            
+            .btn {
+	        	width:100px;
+	        }
+	        
+	        .replelist b {
+	        	cursor: pointer;
+	        }
+	        
+	        .replelist div {
+	        	font-size: 13px;
+	        	font-family: 'gaegu';
+	        }
+	        
+	        .replelist .day {
+	        	font-size: 12px;
+	        	color: gray;
+	        }
+	        
+	        .star {
+	        	font-size: 13px;
+	        }
+	        
+	        span.close {
+	        	cursor: pointer;
+	        	color: red;
+	        	font-size: 18px;
+	        	margin-left: 20px;
+	        }
+	        
+	        div {
+		        background-image: url('../image/climb/bg2.jpg');
+
+	            background-position: center;
+	            background-attachment: fixed;
+	        }
         </style>
         <script type="text/javascript">
         	$(function(){
-        		list();
+        		list();//처음 로딩 시 상품평 출력
+         		//상품평 등록버튼
+         		$("#btnreple").click(function(){
+         			let num = <%=num%>;
+         			let star = $(".selstar").val();
+         			let mes = $("#message").val();
+         			
+         			$.ajax({
+         				type:"get",
+         				dataType:"html",
+         				data:{"num":num,"star":star,"message":mes},
+         				url:"./insertreple.jsp",
+         				success:function() {
+         					//상품평 등록 후 목록 다시 출력
+         					list();
+         					
+         					//입력값 초기화
+         					$(".selstar").val(5);
+         					$("#message").val("");
+         				}
+         			});
+         		});
+        		
+         		//상품평 삭제 이벤트
+         		$(document).on("click","span.close",function(){
+         			let idx = $(this).attr("idx");
+         			if(confirm("해당 상품평을 삭제할까요 ?")){
+         				$.ajax({
+         					type:"get",
+         					dataType:"html",
+         					data:{"idx":idx},
+         					url:"./deletereple.jsp",
+         					success:function(){
+         						list();
+         					}
+         				});
+         			}
+         		});
+         		//상품평 나타내기/숨기기
+         		$(".replelist>b").click(function(){
+         			$(this).next().slideToggle('fast');
+         		});
+         		
         	});
         	
         	function list() {
-        		
+        		$.ajax({
+         			type:"get",
+         			dataType:"json",
+         			data:{"num":<%=num%>},
+         			url:"./listreple.jsp",
+         			success:function(res) {
+         				let n = $(res).length;
+         				$(".replelist>b").text("총"+n+"개");
+         				//상품명 목록 출력
+         				let s = "";
+         				$.each(res,function(idx,ele){
+         					for(let i=1;i<=ele.star;i++) {
+         						s += `<i class="bi bi-star-fill star"></i>`;
+         					}
+         					
+         					for(let i=1;i<=5-ele.star;i++) {
+         						s+= `<i class="bi bi-star star"></i>`;
+         					}
+         					s += `<span class="day">\${ele.writeday}</span>`;
+         					s += "<br>";
+         					s += `<span style="margin-left:10px;">\${ele.message}</span>`;
+         					
+         					s += `<span class="close" idx="\${ele.idx}"><i class="bi bi-x"></i></span>`;
+         					s += "<br>"
+         				});
+         				$(".replelist>div").html(s);
+         				
+         			}
+         		});
         	}
         </script>
     </head>
@@ -133,19 +240,19 @@
 </div>
     <!-- table 을 이용해서 상세페이지 만들기, 
 맨아래에 수정,삭제,목록버튼 넣기 -->
-<div style="margin: 20px;width: 500px;">
-	<table class="table">
+<div style="margin: 20px;width: 550px;">
+	<table class="tab1">
 		<tr>
 			<td>
 				<img src="<%=dto.getCphoto()%>"
 				 width="230" height="300" border="1">
 			</td>
 			<td valign="middle">
-				<h6>클라이밍장 : <%=dto.getCname()%></h6>
-				<h6>일일권 가격 : <%=dto.getCprice()%>원</h6>
-				<h6>다녀온 날 : <%=dto.getCday()%></h6>
-				<h6>등록일 : <%=sdf.format(dto.getWriteday()) %></h6>
-				<button type="button" class="btn btn-sm btn-success">링크<%=dto.getCurl()%></button>
+				<h6 style="color: #9370d8;">클라이밍장 : <%=dto.getCname()%></h6>
+				<h6 style="color: #9370d8;">일일권 가격 : <%=dto.getCprice()%>원</h6>
+				<h6 style="color: #9370d8;">다녀온 날 : <%=dto.getCday()%></h6>
+				<h6 style="color: #9370d8;">등록일 : <%=sdf.format(dto.getWriteday()) %></h6>
+				<button type="button" class="btn btn-sm btn-outline-success" onclick="location.href='<%=dto.getCurl()%>'">링크</button>
 				
 			</td>
 		</tr>
@@ -154,14 +261,14 @@
 				<h6><b>클라이밍장 후기</b></h6>
 				<div class="repleform input-group">
 					<select class="form-select selstar" style="width: 70px;">
-					<option value="5">5점</option>
-					<option value="4">4점</option>
-					<option value="3">3점</option>
-					<option value="2">2점</option>
-					<option value="1">1점</option>
+					<option value="5">⭐⭐⭐⭐⭐ (5점)</option>
+		            <option value="4">⭐⭐⭐⭐ (4점)</option>
+		            <option value="3">⭐⭐⭐ (3점)</option>
+		            <option value="2">⭐⭐ (2점)</option>
+		            <option value="1">⭐ (1점)</option>
 					</select>
 					<input type="text" id="message" class="form-control"
-					placeholder="후기를 써보자" style="width:280px">
+					placeholder="후기를 써보세요 😊" style="width:280px">
 					
 					<button type="button" class="btn btn-sm btn-info"
 					id="btnreple">등록</button>
@@ -174,14 +281,14 @@
 		</tr>
 		<tr>
 			<td colspan="2" align="center">
-				<button type="button" class="btn btn-success btn-sm"
+				<button type="button" class="btn btn-outline-info btn-sm"
 				id="btnupdate" data-bs-toggle="modal" 
 				data-bs-target="#climbUpdateModal">수정</button>
 				
-				<button type="button" class="btn btn-success btn-sm"
+				<button type="button" class="btn btn-outline-danger btn-sm"
 				id="btndelete">삭제</button>
 				
-				<button type="button" class="btn btn-success btn-sm"
+				<button type="button" class="btn btn-outline-warning btn-sm"
 				onclick="location.href='./climbmain.html'">목록</button>
 			</td>
 		</tr>
@@ -230,5 +337,5 @@
 	});
 	</script>
 </div>
-    </body>
+</body>
 </html>
