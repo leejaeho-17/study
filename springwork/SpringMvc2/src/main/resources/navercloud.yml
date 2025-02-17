@@ -1,0 +1,6 @@
+naver:
+  cloud:
+    db: mysql
+    username: study
+    password: 12345
+	
