@@ -209,6 +209,7 @@
 		}
 	</script>
 </head>
+<jsp:include page="../../layout/title.jsp"/>
 <body>
 <!-- The Modal -->
 <div class="modal" id="myMiniPhotoModal">
