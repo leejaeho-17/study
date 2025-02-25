@@ -26,7 +26,9 @@ public class MemberListController {
 		List<MemberDto> memberlist = memberService.getAllMember();
 		
 		model.addAttribute("memberlist", memberlist);
-		
+		//model.addAttribute("naverurl", "https://kr.object.ncloudstorage.com/bitcamp-bucket-121");
+		model.addAttribute("fronturl", "https://hit24cex8733.edge.naverncp.com/e0XP0bC7Fl");
+		model.addAttribute("backurl", "?type=f&w=30&h=30&faceopt=true&ttype=jpg");
 		return "member/memberlist";
 	}
 	

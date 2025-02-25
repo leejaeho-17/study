@@ -124,7 +124,8 @@
 		<br>
 		<span style="margin-left: 300px; font-size: 15px;">
 			<c:if test="${sessionScope.loginstatus != null}">
-				<img src="${root}/save/${sessionScope.loginphoto}" class="profilephoto"
+				<c:set var="naverurl" value="https://kr.object.ncloudstorage.com/bitcamp-bucket-121"/>
+				<img src="${naverurl}/member/${sessionScope.loginphoto}" class="profilephoto"
 				onerror="this.src='${root}/save/noimage.png'">
 				<script>
 					$(".profilephoto").click(function() {
@@ -145,10 +146,11 @@
 		<li>
 			<a href="${root}/member/form">회원가입</a>
 		</li>
-		<c:if test="${sessionScope.loginstatus!=null and sessionScope.loginid == 'admin'}"></c:if>
-		<li>
-			<a href="${root}/member/list">회원목록</a>
-		</li>
+		<c:if test="${sessionScope.loginstatus!=null and sessionScope.loginid == 'admin'}">
+			<li>
+				<a href="${root}/member/list">회원목록</a>
+			</li>
+		</c:if>
 		<li>
 			<a href="${root}/board/list">회원게시판</a>
 		</li>

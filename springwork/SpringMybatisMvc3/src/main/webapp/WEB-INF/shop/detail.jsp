@@ -189,8 +189,9 @@
 					$.each(res, function(idx,item){
 						s += `
 							<div class="item" style="margin-bottom:5px;">
-								<img src="../save/\${item.photo}" class="mini"
-								data-bs-toggle="modal" data-bs-target="#myMiniPhotoModal">
+								
+								<img src="${naverurl}/shop/\${item.photo}" class="mini"
+									data-bs-toggle="modal" data-bs-target="#myMiniPhotoModal">
 								\${item.message}
 								<span class="day">\${item.writetime}</span>
 								<span style:"float:right;">
@@ -240,7 +241,8 @@
 		<tr>
 			<td width="120">
 				<c:forTokens var="photo" items="${dto.sphoto}" delims=",">
-					<img src="../save/${photo}" class="small">
+					<%-- <img src="../save/${photo}" class="small"> --%>
+					<img src="${naverurl}/shop/${photo}" class="small">
 					
 					<script type="text/javascript">
 						$("img.small").click(function() {
@@ -250,7 +252,9 @@
 				</c:forTokens>
 			</td>
 			<td>
-				<img src="../save/${dto.mainPhoto}" class="large"
+				<%-- <img src="../save/${dto.mainPhoto}" class="large"
+				onerror="this.src='../save/noimage.png'"> --%>
+				<img src="${naverurl}/shop/${dto.mainPhoto}" class="large"
 				onerror="this.src='../save/noimage.png'">
 			</td>
 		</tr>	

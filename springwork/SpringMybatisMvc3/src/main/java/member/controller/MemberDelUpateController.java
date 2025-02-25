@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,16 +21,30 @@ import data.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import naver.storage.NcpObjectStorageService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
-@AllArgsConstructor
+//@AllArgsConstructor
+//final 을 붙인 멤버변수를 제외하고 자동주입을 시키겠다
+@RequiredArgsConstructor
 @RequestMapping("/member")
 public class MemberDelUpateController {
 	
-	MemberService memberService;
+	//@Autowired
+	final MemberService memberService;
+	
+	//@Autowired
+	final NcpObjectStorageService storageService;
+
+	//버켓이름 
+	private String bucketName = "bitcamp-bucket-121";
+	
 	
 	@GetMapping("/delete")
 	public String deleteMember(@RequestParam int num) {
@@ -67,6 +82,7 @@ public class MemberDelUpateController {
 		MemberDto dto = memberService.getSelectByMyid(myid);
 		//모델에 dto 저장
 		model.addAttribute("dto", dto);
+		model.addAttribute("naverurl", "https://kr.object.ncloudstorage.com/bitcamp-bucket-121");
 		return "member/mypage";
 	}
 	
@@ -77,26 +93,38 @@ public class MemberDelUpateController {
 			@RequestParam("upload") MultipartFile upload,
 			@RequestParam("num") int num,
 			HttpSession session) {
-		//save 경로
-		String uploadFolder = request.getSession().getServletContext().getRealPath("/save");
-		//기존 파일명 얻기
+//		//save 경로
+//		String uploadFolder = request.getSession().getServletContext().getRealPath("/save");
+//		//기존 파일명 얻기
+//		String oldFilename = memberService.getSelectByNum(num).getMphoto();
+//		//기존 파일 삭제
+//		File oldFile = new File(uploadFolder + "/" + oldFilename);
+//		if (oldFile.exists())
+//			oldFile.delete();
+//		// upload 할 파일명
+//		String uploadFilename = UUID.randomUUID() + "." + upload.getOriginalFilename().split("\\.")[1];
+//		try {
+//			upload.transferTo(new File(uploadFolder + "/" + uploadFilename));
+//			// session도 변경
+//			session.setAttribute("loginphoto", uploadFilename);
+//			// db 도 변경
+//			memberService.changePhoto(uploadFilename, num);
+//		} catch (IllegalStateException | IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		//사진 수정 시 db 에 저장된 파일명을 받아서 스토리지에서 삭제 후 추가할 것
 		String oldFilename = memberService.getSelectByNum(num).getMphoto();
-		//기존 파일 삭제
-		File oldFile = new File(uploadFolder + "/" + oldFilename);
-		if (oldFile.exists())
-			oldFile.delete();
-		// upload 할 파일명
-		String uploadFilename = UUID.randomUUID() + "." + upload.getOriginalFilename().split("\\.")[1];
-		try {
-			upload.transferTo(new File(uploadFolder + "/" + uploadFilename));
-			// session도 변경
-			session.setAttribute("loginphoto", uploadFilename);
-			// db 도 변경
-			memberService.changePhoto(uploadFilename, num);
-		} catch (IllegalStateException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		storageService.deleteFile(bucketName, "member", oldFilename);
+		
+		//네이버 스토리지에 업로드
+		String uploadFilename = storageService.uploadFile(bucketName, "member", upload);
+		//db에서도 수정
+		memberService.changePhoto(uploadFilename, num);
+		//세션도 변경
+		session.setAttribute("loginphoto", uploadFilename);
+
+		
 	}
 	
 	@PostMapping("/update")

@@ -15,14 +15,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.services.ec2.model.Storage;
+
 import data.dto.ShopDto;
 import data.service.ShopService;
 import jakarta.servlet.http.HttpServletRequest;
+import naver.storage.NcpObjectStorageService;
 
 @Controller
 public class ShopDetailDeleteController {
 	@Autowired
 	ShopService shopService;
+	
+	@Autowired
+	NcpObjectStorageService storageService;
+
+	//버켓이름 
+	private String bucketName = "bitcamp-bucket-121";
 	
 	@GetMapping("/shop/detail")
 	public String shopDetial(@RequestParam int num,Model model) {
@@ -31,6 +40,7 @@ public class ShopDetailDeleteController {
 		dto.setMainPhoto(mainPhoto);
 		
 		model.addAttribute("dto", dto);
+		model.addAttribute("naverurl", "https://kr.object.ncloudstorage.com/bitcamp-bucket-121");
 		
 		return "shop/detail";
 	}
@@ -42,19 +52,23 @@ public class ShopDetailDeleteController {
 			)
 	{
 		//배포된 프로젝트의 save 의 위치 구하기
-		String uploadFolder=request.getSession().getServletContext().getRealPath("/save");
+		//String uploadFolder=request.getSession().getServletContext().getRealPath("/save");
 		//삭제전에 사진명들을 얻어야한다
 		String photos=shopService.getSelectOne(num).getSphoto();
 		//, 로 분리
 		String []photo=photos.split(",");
 		
 		//실제 경로에서 파일을 찾아서 삭제
-		for(String f:photo)
-		{
-			java.io.File file=new java.io.File(uploadFolder+"/"+f);
-			//save 폴더에 파일이 존재할경우 삭제
-			if(file.exists())
-				file.delete();
+//		for(String f:photo)
+//		{
+//			java.io.File file=new java.io.File(uploadFolder+"/"+f);
+//			//save 폴더에 파일이 존재할경우 삭제
+//			if(file.exists())
+//				file.delete();
+//		}
+		//네이버 스토리지의 사진 삭제
+		for(String f:photo) {
+			storageService.deleteFile(bucketName, "shop", f);
 		}
 		
 		//db 의 데이타도 삭제
@@ -68,6 +82,8 @@ public class ShopDetailDeleteController {
 		String sphoto = shopService.getSelectOne(num).getSphoto();
 		model.addAttribute("sphoto", sphoto);
 		model.addAttribute("num", num);
+		model.addAttribute("fronturl", "https://hit24cex8733.edge.naverncp.com/e0XP0bC7Fl");
+		model.addAttribute("backurl", "?type=f&w=30&h=30&faceopt=true&ttype=jpg");
 		return "shop/photos";
 	}
 	
@@ -75,21 +91,22 @@ public class ShopDetailDeleteController {
 	@ResponseBody
 	public void deletePhoto(@RequestParam int num,@RequestParam String pname,
 			HttpServletRequest request) {
-		//업로드 경로 구하기
-		String uploadFolder = request.getSession().getServletContext().getRealPath("/save");
-		//스토리지의 사진도 삭제
-		java.io.File file = new java.io.File(uploadFolder + "/" +pname);
-		if(file.exists())
-			file.delete();
+//		//업로드 경로 구하기
+//		String uploadFolder = request.getSession().getServletContext().getRealPath("/save");
+//		//스토리지의 사진도 삭제
+//		java.io.File file = new java.io.File(uploadFolder + "/" +pname);
+//		if(file.exists())
+//			file.delete();
 		//num 에 해당하는 sphoto 를 db 에서 얻는다
+		storageService.deleteFile(bucketName, "shop", pname);
+
 		String sphoto = shopService.getSelectOne(num).getSphoto();
 		//sphoto 에서 pname 부분을 삭제하는데 중간일 경우 뒤에 컴마도 삭제
 		String changephoto = "";
 		if(sphoto.endsWith(pname))
 			changephoto = sphoto.replace(pname, "");
 		else
-			changephoto = sphoto.replace(pname+"," , "");
-		
+			changephoto = sphoto.replace(pname+"," , "");		
 		//변경된 changephoto 를 updatePhoto 를 통해서 보낸다
 		shopService.updatePhoto(num, changephoto);
 	}
@@ -99,22 +116,28 @@ public class ShopDetailDeleteController {
 	public void addPhoto(@RequestParam int num,
 			@RequestParam("upload") List<MultipartFile> uploadList,
 			HttpServletRequest request){
-		//업로드 경로 구하기
-		String uploadFolder = request.getSession().getServletContext().getRealPath("/save");
+//		//업로드 경로 구하기
+//		String uploadFolder = request.getSession().getServletContext().getRealPath("/save");
+//		//새로 업로드할 파일명 구할 변수
+//		String photos = "";
+//		for(MultipartFile f:uploadList) {
+//			//업로드할 파일명 
+//			String uploadFilename = UUID.randomUUID()+"."+f.getOriginalFilename().split("\\.")[1];
+//			photos += uploadFilename + ",";
+//			//업로드
+//			try {
+//				f.transferTo(new java.io.File(uploadFolder + "/" + uploadFilename));
+//			} catch (IllegalStateException | IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+//		}
 		//새로 업로드할 파일명 구할 변수
 		String photos = "";
+		
 		for(MultipartFile f:uploadList) {
-			//업로드할 파일명 
-			String uploadFilename = UUID.randomUUID()+"."+f.getOriginalFilename().split("\\.")[1];
-			photos += uploadFilename + ",";
-			//업로드
-			try {
-				f.transferTo(new java.io.File(uploadFolder + "/" + uploadFilename));
-			} catch (IllegalStateException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+			String uploadFilename = storageService.uploadFile(bucketName, "shop", f);
 			}
-		}
 		//마지막 컴마 제거
 		photos = photos.substring(0, photos.length()-1);
 		//db 에서의 sphoto 얻기

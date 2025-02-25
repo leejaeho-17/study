@@ -85,7 +85,8 @@
 			$.ajax({
 				type:"post",
 				dataType:"text",
-				data:{"mname":$("#updatemname").val(),"mhp":$("#updatemhp").val(),"maddr":$("#updatemaddr").val(),"num":${dto.num}},
+				data:{"mname":$("#updatemname").val(),"mhp":$("#updatemhp").val(),
+					"maddr":$("#updatemaddr").val(),"num":${dto.num}},
 				url:"./update",
 				success:function() {
 					location.reload();
@@ -103,10 +104,16 @@
 </div>
 <jsp:include page="../../layout/title.jsp"/>
 <div style="margin: 30px 100px;">
-	<img src="../save/${dto.mphoto}" class="profilelargephoto"
+	<%-- <img src="../save/${dto.mphoto}" class="profilelargephoto"
+	onerror="this.src='../save/noimage.png'"> --%>
+	<!-- naverstorage 에 있는 사진으로 출력 -->
+	<img src="${naverurl}/member/${dto.mphoto}" class="profilelargephoto"
 	onerror="this.src='../save/noimage.png'">
+	
 	<input type="file" id="fileupload" style="display: none;">
+	
 	<i class="bi bi-camera-fill changecamera"></i>
+	
 	<script type="text/javascript">
 		$(".changecamera").click(function() {
 			$("#fileupload").trigger("click");

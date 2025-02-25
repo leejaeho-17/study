@@ -17,11 +17,18 @@ import org.springframework.web.multipart.MultipartFile;
 import data.dto.ShopRepleDto;
 import data.service.ShopRepleService;
 import jakarta.servlet.http.HttpServletRequest;
+import naver.storage.NcpObjectStorageService;
 
 @RestController
 public class ShopRepleController {
 	@Autowired
 	ShopRepleService repleService;
+
+	@Autowired
+	NcpObjectStorageService storageService;
+
+	//버켓이름 
+	private String bucketName = "bitcamp-bucket-121";
 	
 	@PostMapping("/shop/addreple")
 	public void insertReple(
@@ -29,17 +36,19 @@ public class ShopRepleController {
 			@RequestParam int num,
 			@RequestParam String message,
 			@RequestParam("upload") MultipartFile upload) {
-		//save의 실제 경로 구하기
-		String uploadFolder = request.getSession().getServletContext().getRealPath("/save");
-		//업로드할 파일명 (랜덤 문자열, 확장자)
-		String uploadFilename = UUID.randomUUID()+"."+upload.getOriginalFilename().split("\\.")[1];
-		//사진 업로드
-		try {
-			upload.transferTo(new File(uploadFolder+"/"+uploadFilename));
-		} catch (IllegalStateException | IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		System.out.println(upload.getOriginalFilename()+","+message);
+//		//save의 실제 경로 구하기
+//		String uploadFolder = request.getSession().getServletContext().getRealPath("/save");
+//		//업로드할 파일명 (랜덤 문자열, 확장자)
+//		String uploadFilename = UUID.randomUUID()+"."+upload.getOriginalFilename().split("\\.")[1];
+//		//사진 업로드
+//		try {
+//			upload.transferTo(new File(uploadFolder+"/"+uploadFilename));
+//		} catch (IllegalStateException | IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		String uploadFilename = storageService.uploadFile(bucketName, "shop", upload);
 		//dto 생성
 		ShopRepleDto dto = new ShopRepleDto();
 		dto.setNum(num);
@@ -61,13 +70,19 @@ public class ShopRepleController {
 	
 	@GetMapping("/shop/repledel")
 	public void repleDelete(@RequestParam int idx, HttpServletRequest request) {
-		String uploadFolder = request.getSession().getServletContext().getRealPath("/save");
-		//삭제할 사진명
+//		String uploadFolder = request.getSession().getServletContext().getRealPath("/save");
+//		//삭제할 사진명
+//		String photo = repleService.getPhoto(idx);
+//		//사진 삭제
+//		File file = new File(uploadFolder + "/"+photo);
+//		if(file.exists())
+//			file.delete();
+		
+		//네이버 스토리지의 사진 삭제
 		String photo = repleService.getPhoto(idx);
-		//사진 삭제
-		File file = new File(uploadFolder + "/"+photo);
-		if(file.exists())
-			file.delete();
+		storageService.deleteFile(bucketName, "shop", photo);
+		
+		//db 삭제
 		repleService.deleteShopReple(idx);
 	}
 	

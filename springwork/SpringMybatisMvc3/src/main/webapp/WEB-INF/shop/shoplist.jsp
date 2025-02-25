@@ -56,7 +56,7 @@
 		<c:forEach var="dto" items="${list}">
 			<figure>
 				<a href="./detail?num=${dto.num}">
-				<img src="../save/${dto.mainPhoto}"
+				<img src="${fronturl}/shop/${dto.mainPhoto}${backurl}"
 				onerror="this.src='../save/noimage.png'">
 				</a>
 				<figcaption>
