@@ -141,6 +141,9 @@
 			<a href="${root}/">HOME</a>
 		</li>
 		<li>
+			<a href="${root}/naver/papago">Papago</a>
+		</li>
+		<li>
 			<a href="${root}/shop/list">상품목록</a>
 		</li>
 		<li>
