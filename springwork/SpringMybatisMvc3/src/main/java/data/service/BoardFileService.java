@@ -9,6 +9,7 @@ import data.mapper.BoardFileMapper;
 import lombok.AllArgsConstructor;
 
 @Service
+@AllArgsConstructor
 public class BoardFileService {
 	BoardFileMapper fileMapper;
 	

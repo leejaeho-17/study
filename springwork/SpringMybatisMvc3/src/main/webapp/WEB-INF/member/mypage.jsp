@@ -75,6 +75,7 @@
        				<td colspan="2" align="center">
        					<button type="button" class="btn btn-sm btn-success" id="btnupdate" data-bs-dismiss="modal">수정</button>
        				</td> 
+       				
        			</tr>
        		</tbody>
        	</table>
@@ -171,7 +172,41 @@
 		<!-- 문제 : 아이디를 제외한 나머지 정보(mname,mhp,maddr)수정(모달)
 		수정 후 reload 할 거니까 @responsebody 로 메서드 구현 -->
 		<button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal" data-bs-target="#myUpdateModal">회원정보수정</button>
-	</div>
+		
+	</div>	
 </div>
+<!-- 내가 쓴 게시글 -->
+		<div style="margin: 20px; width: 600px;clear: both;">
+			<h5>내가 쓴 게시글</h5>
+			<table class="table table-bordered tabmyboard">
+				<thead>
+					<tr>
+						<th width="60">번호</th>
+						<th width="350">제목</th>
+						<th width=100>작성일</th>
+						<th>조회</th>
+					</tr>
+				</thead>
+				<tbody>
+				<c:forEach var="dto" items="${list}" varStatus="i">
+					<tr>
+						<td align="center">${i.count}</td>
+						<td>
+							<a href="../board/detail?idx=${dto.idx}" style="color:black;text-decoration: none;">
+								<c:if test="${dto.relevel!=0}"><mark>[답글]</mark></c:if>
+								${dto.subject}
+							</a>
+						</td>
+						<td align="center">
+							<span style="font-size: 0.8em;">
+								<fmt:formatDate value="${dto.writeday}" pattern="yyyy-MM-dd"/>
+							</span>
+						</td>
+						<td align="center">${dto.readcount }</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+		</div>
 </body>
 </html>

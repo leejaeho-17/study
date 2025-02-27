@@ -16,9 +16,67 @@
 		body *{
 			font-family: 'jua';
 	    }
+	    
+	    .tabform tbody th {
+	    	background-color: orange;
+	    	
+	    }
 	</style>
 </head>
 <body>
-        
+<!-- 로그인 안하면 경고 후 이전페이지로 이동 -->
+<c:if test="${sessionScope.loginstatus == null}">
+	<script>
+		alert("회원게시판입니다 \n먼저 로그인을 해주세요")
+		history.back();
+	</script>
+</c:if>
+<jsp:include page="../../layout/title.jsp"/>
+<div style="margin: 20px;width: 600px;">
+	<form action="./insert" method="post" enctype="multipart/form-data">
+		<input type="hidden" name="idx" value="${idx}"> 
+		<input type="hidden" name="pageNum" value="${pageNum}"> 
+		<input type="hidden" name="regroup" value="${regroup}"> 
+		<input type="hidden" name="restep" value="${restep}"> 
+		<input type="hidden" name="relevel" value="${relevel}"> 
+		<table class="tabform table table-bordered">
+			<caption align="top">
+				<h5>${idx==0?"[새글쓰기]":"[답글쓰기]"}</h5>
+			</caption>
+			<tbody>
+				<tr>
+					<th width="150">제 목</th>
+					<td>
+						<input type="text" name="subject" class="form-control"
+						required="required" autofocus="autofocus">
+					</td>
+				</tr>
+				<tr>
+					<th width="150">사 진</th>
+					<td>
+						<input type="file" name="upload" class="form-control"
+						multiple="multiple">
+					</td>
+				</tr>
+				<tr>
+					<th width="150">내 용</th>
+					<td>
+						<textarea name="content" class="form-control"
+						required="required" style="width: 100%;height: 150px;"></textarea>
+					</td>	
+				</tr>
+				<tr>
+					<td colspan="2" align="center">
+						<button type="submit" class="btn btn-outline-secondary"
+						style="width: 100px;">글저장</button>
+						
+						<button type="button" class="btn btn-outline-secondary"
+						style="width: 100px;" onclick="history.back()">이전으로</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+</div>
 </body>
 </html>

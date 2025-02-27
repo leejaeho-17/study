@@ -21,10 +21,10 @@
 	<select id="getPagingList" parameterType="Map" resultType="BoardDto">
 		select * from board order by regroup desc, restep asc limit #{start},#{perpage}
 	</select>
-	<update id="updateReadcount" parameterType="idx">
+	<update id="updateReadcount" parameterType="int">
 		update board set readcount = readcount+1 where idx = #{idx}
 	</update>
-	<select id="getSelectByIdx" parameterType="idx" resultType="BoardDto">
+	<select id="getSelectByIdx" parameterType="int" resultType="BoardDto">
 		select * from board where idx = #{idx}
 	</select>
 	<select id="getSelectById" parameterType="String" resultType="BoardDto">
