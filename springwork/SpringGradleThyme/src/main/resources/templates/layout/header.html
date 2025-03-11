@@ -12,14 +12,11 @@
          font-family: 'Jua';
       }
       
-      .menu li {
-      	float: left;
-      }
    </style>
 </head>
 <body>
 <div th:fragment="menuFragment" style="background-color:pink">
-   <ui class="menu">
+   <ul class="menu">
       <li>
          <a th:href="@{/}">Home</a>
       </li>
@@ -38,7 +35,10 @@
       <li>
          <a th:href="@{/hello5(myid='admin')}">세션</a>
       </li>
-   </ui>
+   </ul>
+   <hr style="clear: both;">
+   
+   <link rel="stylesheet" href="/mystyle.css"/>
 </div>
 </body>
 </html>
