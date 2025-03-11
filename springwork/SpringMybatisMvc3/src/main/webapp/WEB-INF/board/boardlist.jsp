@@ -84,6 +84,11 @@
 							<c:if test="${dto.photoCount>1}">
 								<i class="bi bi-images picon"></i>
 							</c:if>
+							&nbsp;
+							<!-- 댓글이 있는 경우만 갯수 출력 -->
+							<c:if test="${dto.repleCount>0}">
+								<span style="color:red;">[${dto.repleCount}]</span>
+							</c:if>
 						</a>
 					</td>
 					<td align="center">${dto.writer}</td>

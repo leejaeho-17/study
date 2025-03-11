@@ -32,7 +32,6 @@ public class LoginController {
 			
 			String photo = memberService.getSelectByMyid(loginid).getMphoto();
 			session.setAttribute("loginphoto", photo);
-			
 		}
 		map.put("result", b?"success":"fail");
 		

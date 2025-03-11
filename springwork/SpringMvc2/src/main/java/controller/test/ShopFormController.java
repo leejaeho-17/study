@@ -79,6 +79,4 @@ public class ShopFormController {
 		
 		return "shop/list3";
 	}
-	
-	
 }

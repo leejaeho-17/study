@@ -1,0 +1,122 @@
+!SESSION 2025-03-05 17:50:50.737 -----------------------------------------------
+eclipse.buildId=4.34.0.202502032007
+java.version=21.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=aarch64, WS=cocoa, NL=ko_KR
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -keyring /Users/jaeho/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch aarch64 -product org.springframework.boot.ide.branding.sts4 -keyring /Users/jaeho/.eclipse_keyring -data /Users/jaeho/Desktop/naver1210/study/naver17study/springwork/SpringMybatisMvc3
+
+!ENTRY ch.qos.logback.classic 1 0 2025-03-05 17:50:51.930
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-03-05 17:50:52.862
+!MESSAGE Logback config file: /Users/jaeho/Desktop/naver1210/study/naver17study/springwork/SpringMybatisMvc3/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.7.0.20241001-1350.xml
+
+!ENTRY org.eclipse.ui 2 0 2025-03-05 17:50:52.972
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-05 17:50:52.972
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.eclipse.ui 2 0 2025-03-05 17:50:53.222
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-05 17:50:53.222
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.eclipse.mylyn.tasks.ui 2 0 2025-03-05 17:50:55.358
+!MESSAGE No search provider was registered. Tasks search is not available.
+
+!ENTRY org.eclipse.ui 4 0 2025-03-05 17:52:02.525
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.StringIndexOutOfBoundsException: Range [0, 78) out of bounds for length 60
+	at java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:55)
+	at java.base/jdk.internal.util.Preconditions$1.apply(Preconditions.java:52)
+	at java.base/jdk.internal.util.Preconditions$4.apply(Preconditions.java:213)
+	at java.base/jdk.internal.util.Preconditions$4.apply(Preconditions.java:210)
+	at java.base/jdk.internal.util.Preconditions.outOfBounds(Preconditions.java:98)
+	at java.base/jdk.internal.util.Preconditions.outOfBoundsCheckFromToIndex(Preconditions.java:112)
+	at java.base/jdk.internal.util.Preconditions.checkFromToIndex(Preconditions.java:349)
+	at java.base/java.lang.String.checkBoundsBeginEnd(String.java:4865)
+	at java.base/java.lang.String.substring(String.java:2834)
+	at org.eclipse.ui.internal.ide.DirectoryProposalContentAssist.lambda$1(DirectoryProposalContentAssist.java:238)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:196)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:91)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4660)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1622)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1645)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1626)
+	at org.eclipse.swt.widgets.Combo.setText(Combo.java:1790)
+	at org.eclipse.swt.widgets.Combo.setText(Combo.java:1770)
+	at org.eclipse.ui.internal.ide.ChooseWorkspaceDialog$4.widgetSelected(ChooseWorkspaceDialog.java:575)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:265)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:91)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4660)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1622)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1645)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1630)
+	at org.eclipse.swt.widgets.Widget.notifyListeners(Widget.java:1392)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4427)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4003)
+	at org.eclipse.jface.window.Window.runEventLoop(Window.java:823)
+	at org.eclipse.jface.window.Window.open(Window.java:799)
+	at org.eclipse.ui.internal.ide.ChooseWorkspaceDialog.prompt(ChooseWorkspaceDialog.java:140)
+	at org.eclipse.ui.internal.ide.actions.OpenWorkspaceAction.showChooseWorkspaceDialog(OpenWorkspaceAction.java:252)
+	at org.eclipse.ui.internal.ide.actions.OpenWorkspaceAction.promptForWorkspace(OpenWorkspaceAction.java:233)
+	at org.eclipse.ui.internal.ide.actions.OpenWorkspaceAction.run(OpenWorkspaceAction.java:203)
+	at org.eclipse.ui.internal.ide.actions.OpenWorkspaceAction$OpenDialogAction.run(OpenWorkspaceAction.java:62)
+	at org.eclipse.jface.action.Action.runWithEvent(Action.java:474)
+	at org.eclipse.jface.action.ActionContributionItem.handleWidgetSelection(ActionContributionItem.java:581)
+	at org.eclipse.jface.action.ActionContributionItem.lambda$4(ActionContributionItem.java:415)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:91)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4660)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1622)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1645)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1630)
+	at org.eclipse.swt.widgets.Widget.notifyListeners(Widget.java:1392)
+	at org.eclipse.swt.widgets.Display.runDeferredEvents(Display.java:4427)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:4003)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$5.run(PartRenderingEngine.java:1151)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1042)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:153)
+	at org.eclipse.ui.internal.Workbench.lambda$3(Workbench.java:663)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:339)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:570)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:173)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:178)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:208)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:143)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:109)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:439)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:271)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:668)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:605)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1481)
+!SESSION 2025-03-06 10:02:12.756 -----------------------------------------------
+eclipse.buildId=4.34.0.202502032007
+java.version=21.0.6
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=macosx, ARCH=aarch64, WS=cocoa, NL=ko_KR
+Framework arguments:  -product org.springframework.boot.ide.branding.sts4 -keyring /Users/jaeho/.eclipse_keyring
+Command-line arguments:  -os macosx -ws cocoa -arch aarch64 -product org.springframework.boot.ide.branding.sts4 -keyring /Users/jaeho/.eclipse_keyring -data /Users/jaeho/Desktop/naver1210/study/naver17study/springwork/SpringMybatisMvc3
+
+!ENTRY ch.qos.logback.classic 1 0 2025-03-06 10:02:13.986
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-03-06 10:02:14.913
+!MESSAGE Logback config file: /Users/jaeho/Desktop/naver1210/study/naver17study/springwork/SpringMybatisMvc3/.metadata/.plugins/org.eclipse.m2e.logback/logback.2.7.0.20241001-1350.xml
+
+!ENTRY org.eclipse.ui 2 0 2025-03-06 10:02:15.073
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-06 10:02:15.073
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.eclipse.ui 2 0 2025-03-06 10:02:15.338
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-03-06 10:02:15.338
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.eclipse.mylyn.tasks.ui 2 0 2025-03-06 10:02:17.228
+!MESSAGE No search provider was registered. Tasks search is not available.

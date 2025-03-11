@@ -194,8 +194,17 @@
 						<td>
 							<a href="../board/detail?idx=${dto.idx}" style="color:black;text-decoration: none;">
 								<c:if test="${dto.relevel!=0}"><mark>[답글]</mark></c:if>
-								${dto.subject}
-							</a>
+								${dto.subject} 
+								<!-- 이미지가 한 개 이상 있는경우 이미지 아이콘 넣기
+								1개일 경우 : <i class="bi bi-image"></i>
+								1개 이상일 경우 : <i class="bi bi-images"></i> --> 
+								<c:if test="${dto.photoCount==1}">
+									<i class="bi bi-image picon"></i>
+								</c:if> 
+								<c:if test="${dto.photoCount>1}">
+									<i class="bi bi-images picon"></i>
+								</c:if>
+						</a>
 						</td>
 						<td align="center">
 							<span style="font-size: 0.8em;">

@@ -3,6 +3,6 @@ server:
 spring:
   mvc:
     view:
-      prefix: /WEB-INF/day0214
+      prefix: /WEB-INF/day0214/
       suffix: .jsp
  

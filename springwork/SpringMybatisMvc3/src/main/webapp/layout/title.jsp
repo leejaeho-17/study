@@ -75,7 +75,7 @@
       </div>
 
       <!-- Modal body -->
-      <div class="modal-body">
+      <div class="modal-body" style="background-image: url('../save/noimage.png')">
       <form id="loginfrm">
       	<table class="logintab">
        		<tbody>

@@ -20,5 +20,6 @@ public class BoardDto {
 	private int restep;
 	private Timestamp writeday;
 	private List<String> photos;
-	public int photoCount;
+	private int photoCount;
+	private int repleCount;
 }
