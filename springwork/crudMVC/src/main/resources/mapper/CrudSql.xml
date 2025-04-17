@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="crud.mapper.CrudMapper">
+<select id="selectAll" resultType="CrudDto">
+	select * from crud order by num
+</select>
+<insert id="insertCrud" parameterType="CrudDto">
+	insert into crud (name,email,age) values (#{name},#{email},#{age})
+</insert>
+<update id="updateCrud" parameterType="CrudDto">
+	update crud set name = #{name}, email = #{email}, age = #{age} where num = #{num}
+</update>
+<select id="selectOne" parameterType="int" resultType="CrudDto">
+	select * from crud where num = #{num}
+</select>
+<delete id="deleteCrud" parameterType="int">
+	delete from crud where num = #{num}
+</delete>
+</mapper>
