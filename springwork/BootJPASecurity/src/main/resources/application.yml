@@ -1,6 +1,10 @@
 server:
   port: 8090
 
+#session 유지시간 변경(기본은 30분)
+  servlet:
+    session:
+      timeout: 90m
 #mysql setting
 spring:
   datasource:
@@ -22,7 +26,3 @@ spring:
     database: mysql
 #Mysql 상세 지정
     database-platform: org.hibernate.dialect.MySQLDialect
-#swagger doc
-springdoc:
-  api-docs:
-    path: /api/mycardoc/swagger

@@ -20,9 +20,11 @@
 </head>
 <body>
 <h4 class="alert alert-danger">
-	<b>[[${totalCount}]] 개의 자동차가 등록되었습니다</b>
+	<b>[[${totalCount}]] 개의 자동차가 등록되었습니다(총 페이지수 :[[${totalPage}]])</b>
 	
 	<button onclick="location.href='./addform'" class="btn btn-sm btn-success">자동차 등록</button>
+	
+	<button onclick="location.href='./searchpage'" class="btn btn-sm btn-warning">검색페이지로 이동</button>
 </h4>
 <table class="table table-bordered tab" style="width: 700px;"> 
 	<caption align="top"><b>등록 자동차 목록</b></caption>
@@ -46,5 +48,11 @@
 		</td>
 	</tr>
 </table>
+<div style="width: 600px;text-align: center;" th:if="${pageSize<totalCount}">
+	<button type="button" th:onclick="|location.href='@{./carlist(more=2)}'|">more</button>
+</div>
+<div style="width: 600px;text-align: center;" th:if="${pageSize>=totalCount}">
+	<button type="button" th:onclick="|location.href='@{./carlist}'|">접기</button>
+</div>
 </body>
 </html>     

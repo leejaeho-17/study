@@ -2,6 +2,8 @@ package bit.day0417.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -34,6 +36,11 @@ public class MycarDao {
 		return mycarRepository.findAll(Sort.by(Sort.Direction.ASC,"carquip"));//구입일의 오름차순으로 정렬해서 출력
 	}
 	
+	//페이지에 필요한 만큼만 가져가는 메서드
+	public Page<MycarDto> getAllPageCars(Pageable pageable) {
+		return mycarRepository.findAll(pageable);//페이지에 필요한 만큼만 데이터 반환
+	}
+	
 	public MycarDto getData(@Param("num") Long num) {
 		return mycarRepository.getReferenceById(num);
 	}
@@ -45,6 +52,16 @@ public class MycarDao {
 	public void deleteCar(Long num) {
 		mycarRepository.deleteById(num);
 	}
+	
+	public List<MycarDto> getSearchList(String search) {
+		return mycarRepository.getSearchList(search);
+	}
+	
+	public List<MycarDto> findByCarnameContaining(String search) {
+		return mycarRepository.findByCarnameContaining(search);
+	}
+	
+	
 }
 
 

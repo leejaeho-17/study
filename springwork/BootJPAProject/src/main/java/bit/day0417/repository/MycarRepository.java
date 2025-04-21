@@ -1,7 +1,10 @@
 package bit.day0417.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import bit.day0417.data.MycarDto;
 
@@ -15,4 +18,10 @@ public interface MycarRepository extends JpaRepository<MycarDto, Long>{
 	//nativeQuery : jpa 에서 지정한 규칙을 모두 무시할 수 있는 속성
 	@Query(value = "select count(*) from jpamycar",nativeQuery = true)
 	public Long getTotalMycount();
+	
+	@Query(value = "select * from jpamycar where carname like concat('%',:search,'%')",nativeQuery = true)
+	public List<MycarDto> getSearchList(@Param("search") String search);
+	
+	
+	public List<MycarDto> findByCarnameContaining(String search);
 }

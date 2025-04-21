@@ -2,6 +2,8 @@ package bit.day0417.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
@@ -27,6 +29,10 @@ public class MycarService {
 		return mycarDao.getAllCarList();
 	}
 	
+	public Page<MycarDto> getAllPageCars(Pageable pageable) {
+		return mycarDao.getAllPageCars(pageable);
+	}
+	
 	public MycarDto getData(@Param("num") Long num) {
 		return mycarDao.getData(num);
 	}
@@ -37,5 +43,13 @@ public class MycarService {
 	
 	public void deleteCar(Long num) {
 		mycarDao.deleteCar(num);
+	}
+	
+	public List<MycarDto> getSearchList(String search) {
+		return mycarDao.getSearchList(search);
+	}
+	
+	public List<MycarDto> findByCarnameContaining(String search) {
+		return mycarDao.findByCarnameContaining(search);
 	}
 }

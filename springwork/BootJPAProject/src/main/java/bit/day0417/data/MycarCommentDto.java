@@ -17,6 +17,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -48,4 +49,7 @@ public class MycarCommentDto {
 	@Column(updatable = false) //수정 시 컬럼 제외
 	@CreationTimestamp //엔터티가 생성되는 시점의 시간이 자동등록
 	private Timestamp writeday;
+	
+	@Transient
+	private Long num;
 }
