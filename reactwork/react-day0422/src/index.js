@@ -7,10 +7,15 @@ import MainApp from './components/MainApp';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    {/* <App /> */}
+  // <React.StrictMode>
+  //   {/* <App /> */}
+  //   <MainApp/>
+  // </React.StrictMode>
+
+  //컴포넌트에서 useEffect 가 두번 호출되는 현상을 막으려면
+  <>
     <MainApp/>
-  </React.StrictMode>
+  </>
 );
 
 // If you want to start measuring performance in your app, pass a function

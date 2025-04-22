@@ -4,9 +4,12 @@ import TwoApp from './TwoApp';
 import ThreeApp from './ThreeApp';
 import FourApp from './FourApp';
 import FiveApp from './FiveApp';
+import SixApp from './SixApp';
+import SevenApp from './SevenApp';
+import EightApp from './EightApp';
 
 const MainApp = () => {
-    const [idx,setIdx] = useState(3);
+    const [idx,setIdx] = useState(8);
 
     //radio 이벤트
     const selectApp = (e) => {
@@ -23,11 +26,11 @@ const MainApp = () => {
             </label>
             <label>
                 <input type='radio' defaultValue={2} name="selectapp" 
-                onClick={selectApp} />TwoApp
+                onClick={selectApp}/>TwoApp
             </label>
             <label>
                 <input type='radio' defaultValue={3} name="selectapp"
-                onClick={selectApp} defaultChecked/> ThreeApp
+                onClick={selectApp}/> ThreeApp
             </label>
             <label>
                 <input type='radio' defaultValue={4} name="selectapp"
@@ -37,9 +40,21 @@ const MainApp = () => {
                 <input type='radio' defaultValue={5} name="selectapp"
                 onClick={selectApp}/>FiveApp
             </label>
+            <label>
+                <input type='radio' defaultValue={6} name="selectapp"
+                onClick={selectApp} />SixApp
+            </label>
+            <label>
+                <input type='radio' defaultValue={7} name="selectapp"
+                onClick={selectApp} />SevenApp
+            </label>
+            <label>
+                <input type='radio' defaultValue={8} name="selectapp"
+                onClick={selectApp}/>EightApp
+            </label>
             <div style={{marginTop:'20px'}}>
                 {idx===1?<OneApp/>:idx===2?<TwoApp/>:idx===3?<ThreeApp/>:
-                idx===4?<FourApp/>:<FiveApp/>}
+                idx===4?<FourApp/>:idx===5?<FiveApp/>:idx===6?<SixApp/>:idx===7?<SevenApp/>:<EightApp/>}
             </div>
         </div>
     );
