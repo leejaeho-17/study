@@ -1,0 +1,17 @@
+div.box {
+    width: 30px;
+    height: 30px;
+    float: left;
+    margin: 10px;
+    border: 1px solid black;
+    border-radius: 100px;
+}
+
+img.mycar {
+    width: 100px;
+    height: 80px;
+    border: 2px solid gray;
+    margin: 10px;
+    cursor: pointer;
+    padding: 3px;
+}
