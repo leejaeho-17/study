@@ -10,7 +10,7 @@ import SevenApp from './SevenApp';
 import EightApp from './EightApp';
 
 const MainApp = () => {
-    const [idx,setIdx] = useState(5);
+    const [idx,setIdx] = useState(8);
     return (
         <div>
             <Alert severity='info'>2025-04-23 REACT STUDY</Alert>
@@ -23,10 +23,10 @@ const MainApp = () => {
                 <option value={2} >TwoApp</option>
                 <option value={3} >ThreeApp</option>
                 <option value={4} >FourApp </option>
-                <option value={5} selected>FiveApp</option>
-                <option value={6}>SixApp</option>
-                <option value={7}>SevenApp</option>
-                <option value={8}>EightApp</option>
+                <option value={5} >FiveApp</option>
+                <option value={6} >SixApp</option>
+                <option value={7} >SevenApp</option>
+                <option value={8} selected>EightApp</option>
             </select>
         </div>
             {
