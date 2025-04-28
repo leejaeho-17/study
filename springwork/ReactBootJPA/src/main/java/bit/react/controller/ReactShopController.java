@@ -59,9 +59,12 @@ public class ReactShopController {
 	
 	//사진은 따로 업로드
 	//form-data 설정을 리액트에서 한 경우 생략 가능(위의 코드)
-	//@PostMapping(value = "/upload", consumes = org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE)
-	@PostMapping(value = "/upload")
+	@PostMapping(value = "/upload", consumes = org.springframework.http.MediaType.MULTIPART_FORM_DATA_VALUE)
+//	@PostMapping(value = "/upload")
 	public String uploadPhoto(@RequestParam("upload") MultipartFile upload) {
+		System.out.println("업로드한 파일명 : "+upload.getOriginalFilename());
+		if(uploadFilename != null)
+			storageService.deleteFile(bucketName, folderName, uploadFilename);//이전에 업로드한 사진 지우기
 		//네이버 클라우드에 업로드 하기
 		uploadFilename = storageService.uploadFile(bucketName, folderName, upload);
 		return uploadFilename;
@@ -88,4 +91,18 @@ public class ReactShopController {
 		return "delete ok";
 	}
 	
+	@PostMapping("/shopupdate")
+	public String updateShop(@RequestBody ShopDto dto) {
+		ShopEntity entity = ShopEntity.builder()
+				.sangpum(dto.getSangpum())
+				.color(dto.getColor())
+				.price(dto.getPrice())
+				.sangguip(dto.getSangguip())
+				.num(dto.getNum())
+				.photo(uploadFilename)
+				.build();
+		shopDao.updataShop(entity);
+		uploadFilename = null;
+		return "update ok";
+	}
 }

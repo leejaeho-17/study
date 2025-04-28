@@ -38,6 +38,13 @@ const FourApp = () => {
         .then(res=>setShopList(res.data));
     }
 
+    //삭제 함수
+    const onDelete = (num) => {
+        let deleteurl = "/react/shopdelete?num="+num;
+        axios.delete(deleteurl)
+        .then(res => list());//삭제 성공 후 목록 다시 출력
+    }
+
     //처음 시작시 딱 한번만 list 호출하기
     useEffect(()=>{
         list();
@@ -58,7 +65,7 @@ const FourApp = () => {
                     shoplist
                     &&
                     shoplist.map((row,idx)=>
-                        <FourRowItem key={idx} row={row}/>)
+                        <FourRowItem key={idx} row={row} onDelete={onDelete}/>)
                 }
                 </tbody>
             </table>
