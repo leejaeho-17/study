@@ -57,7 +57,7 @@ public class SecurityConfig {
 				.requestMatchers("/","/login","/member/**","/react/**","/board/list").permitAll()
 				.requestMatchers(AUTH_WHITELIST).permitAll()
 				.requestMatchers("/admin","/auth/member/list").hasRole("ADMIN")
-				.requestMatchers("/auth/baord/*").hasAnyRole("ADMIN","MEMBER")
+				.requestMatchers("/auth/board/*").hasAnyRole("ADMIN","MEMBER")
 				.anyRequest().authenticated()//로그인한 사용자만 접근
 				);
 		

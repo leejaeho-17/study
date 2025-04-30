@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import errorimg from '../image/error.png';
 import { JoinForm, LoginForm, MemberList } from '../member';
 import { Home } from '../components';
-import { BoardDetail, BoardForm, BoardList } from '../board';
+import { BoardDetail, BoardForm, BoardList, UpdateForm } from '../board';
 
 const RouterMain = () => {
     return (
@@ -25,6 +25,7 @@ const RouterMain = () => {
                         <Route path='list' element={<BoardList/>}/>
                         <Route path='form' element={<BoardForm/>}/>
                         <Route path='detail/:num' element={<BoardDetail/>}/>
+                        <Route path='update/:num' element={<UpdateForm/>}/>
                     </Route>            
 
                     {/* 그 이외의 모든 매핑주소일경우 호출 */}
