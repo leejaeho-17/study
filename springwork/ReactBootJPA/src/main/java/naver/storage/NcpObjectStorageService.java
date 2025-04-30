@@ -24,13 +24,12 @@ public class NcpObjectStorageService implements ObjectStorageService {
 	public NcpObjectStorageService(NaverConfig naverConfig) {
 		System.out.println("NcpObjectStorageService 생성");
 		s3 = AmazonS3ClientBuilder.standard()
-	               .withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(
-	                     naverConfig.getEndPoint(), naverConfig.getRegionName()))
-	               .withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(
-	                     naverConfig.getAccessKey(), naverConfig.getSecretKey())))
-	               .build();
-	      }	
-	
+				.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(
+						naverConfig.getEndPoint(), naverConfig.getRegionName()))
+				.withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(
+						naverConfig.getAccessKey(), naverConfig.getSecretKey())))
+				.build();
+	}
 	
 	@Override
 	public String uploadFile(String bucketName, String directoryPath, MultipartFile file) {
@@ -41,10 +40,10 @@ public class NcpObjectStorageService implements ObjectStorageService {
 		}
 
 		try (InputStream fileIn = file.getInputStream()) {
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmm_");
-			String filename = sdf.format(new Date())+UUID.randomUUID().toString().substring(0, 10) 
-					+ "." + file.getOriginalFilename().split("\\.")[1];
-			
+			SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMddHHmm_");
+			String filename =sdf.format(new Date())+UUID.randomUUID().toString().substring(0,10)
+					+"."+file.getOriginalFilename().split("\\.")[1];
+
 			ObjectMetadata objectMetadata = new ObjectMetadata();
 			objectMetadata.setContentType(file.getContentType());
 
@@ -67,14 +66,33 @@ public class NcpObjectStorageService implements ObjectStorageService {
 	@Override
 	public void deleteFile(String bucketName, String directoryPath, String fileName) {
 		// TODO Auto-generated method stub
-		String path = directoryPath + "/" + fileName;
-		//해당 버킷에 파일이 존재하면 true 반환
-		boolean isfind = s3.doesObjectExist(bucketName,path);
-		//존재할 경우 삭제
+		String path=directoryPath+"/"+fileName;
+		//해당 버킷에 파일이 존재하면 true반환
+		boolean isfind=s3.doesObjectExist(bucketName,path);
+		//존재할경우 삭제
 		if(isfind) {
 			s3.deleteObject(bucketName,path);
-			System.out.println(path+"삭제완료");
-		}
+			System.out.println(path+":삭제완료");
+		}		
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

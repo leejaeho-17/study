@@ -19,15 +19,16 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Table(name = "jpashop")
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class ShopEntity {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy =GenerationType.IDENTITY)
 	private int num;
 	
 	@Column(length = 40)
@@ -44,8 +45,20 @@ public class ShopEntity {
 	@Column(length = 20)
 	private String sangguip;
 	
-	@Column(updatable = false) //수정 시 제외
+	@Column(updatable = false) //수정시 제외
 	@JsonFormat(pattern = "yyyy-MM-dd HH:mm",timezone = "Asia/Seoul")
 	@CreationTimestamp
 	private Timestamp writeday;
 }
+
+
+
+
+
+
+
+
+
+
+
+

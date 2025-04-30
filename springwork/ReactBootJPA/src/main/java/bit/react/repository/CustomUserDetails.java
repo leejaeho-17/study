@@ -8,15 +8,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import bit.react.data.UserEntity;
 import lombok.RequiredArgsConstructor;
+
 @RequiredArgsConstructor
 public class CustomUserDetails implements UserDetails{
-	
 	private final UserEntity userEntity;
-
+	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub
-		Collection<GrantedAuthority> collection = new ArrayList<>();
+		Collection<GrantedAuthority> collection=new ArrayList<>();
 		collection.add(new GrantedAuthority() {
 			
 			@Override
