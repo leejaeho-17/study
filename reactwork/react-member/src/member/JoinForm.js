@@ -114,7 +114,7 @@ const JoinForm = () => {
                         <tr>
                             <th className='table-info'>가입권한</th>
                             <td>
-                                <select className='form-select'>
+                            <select className='form-select' value={role} onChange={(e) => setRole(e.target.value)}>
                                     <option value={'ROLE_MEMBER'}>일반멤버</option>
                                     <option value={'ROLE_ADMIN'}>관리자</option>
                                 </select>

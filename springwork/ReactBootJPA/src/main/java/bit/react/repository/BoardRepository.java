@@ -11,7 +11,7 @@ import jakarta.transaction.Transactional;
 public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
 
 	@Query(value = """
-			update jpaboard set readcount = readcount+1 where num =: num
+			update jpaboard set readcount = readcount+1 where num =:num
 			""", nativeQuery = true)
 	@Modifying
 	@Transactional
